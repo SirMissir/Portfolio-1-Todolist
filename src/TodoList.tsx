@@ -1,18 +1,38 @@
 import React from 'react';
+import {TaskType} from "./App";
 
-const TodoList = () => {
+type TodoListPropsType = {
+    title: string
+    tasks: Array<TaskType>
+}
+
+
+const TodoList:React.FC<TodoListPropsType> = (props) => {
+
+
+    let isAllTasksNotIsDone = true // все не выполнено, change background-color todolist
+    for (let i = 0; i < props.tasks.length; i++) {
+        if(props.tasks[i].isDone === true){
+            isAllTasksNotIsDone = false
+        }
+    }
+    const todoClasses = isAllTasksNotIsDone ? "todolist-empty" : "todolist"
+
+
+
+
     return (
         <div>
-            <div className="todolist">
-                <h3>What to learn</h3>
+            <div className={todoClasses}>
+                <h3>{props.title}</h3>
                 <div>
                     <input/>
                     <button>+</button>
                 </div>
                 <ul>
-                    <li><input type="checkbox" checked={true}/> <span>HTML&CSS</span></li>
-                    <li><input type="checkbox" checked={true}/> <span>JS</span></li>
-                    <li><input type="checkbox" checked={false}/> <span>React</span></li>
+                    <li><input type="checkbox" checked={props.tasks[0].isDone}/> <span>{props.tasks[0].title}</span></li>
+                    <li><input type="checkbox" checked={props.tasks[1].isDone}/> <span>{props.tasks[1].title}</span></li>
+                    <li><input type="checkbox" checked={props.tasks[2].isDone}/> <span>{props.tasks[2].title}</span></li>
                 </ul>
                 <div>
                     <button>All</button>

@@ -27,10 +27,12 @@ function App(): JSX.Element {
         }
         setTasks([newTask,...tasks])
     }
-
     const removeTask = (taskId: string) => {
         setTasks(tasks.filter((task) => task.id !== taskId))
         // console.log(tasks)
+    }
+    const changeTaskStatus = (taskId: string) =>{
+        setTasks(tasks.map(t => t.id === taskId ? {...t,isDone: !t.isDone} : t))
     }
 
     const [filter, setFilter] = useState<"all" | "active" | "completed">("all")
@@ -59,6 +61,7 @@ function App(): JSX.Element {
                 removeTask={removeTask}
                 changeTodolistFilter={changeTodolistFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
             />
             {/*<TodoList title={ "What to buy"} tasks={tasks}/>*/}
             {/*<TodoList title={ "What to read"}/>*/}

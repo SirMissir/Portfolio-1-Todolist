@@ -31,8 +31,8 @@ function App(): JSX.Element {
         setTasks(tasks.filter((task) => task.id !== taskId))
         // console.log(tasks)
     }
-    const changeTaskStatus = (taskId: string) =>{
-        setTasks(tasks.map(t => t.id === taskId ? {...t,isDone: !t.isDone} : t))
+    const changeTaskStatus = (taskId: string, newIsDone: boolean) =>{
+        setTasks(tasks.map(t => t.id === taskId ? {...t,isDone: newIsDone} : t))
     }
 
     const [filter, setFilter] = useState<"all" | "active" | "completed">("all")

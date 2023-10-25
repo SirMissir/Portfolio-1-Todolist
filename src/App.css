@@ -18,3 +18,10 @@
   padding: 40px;
   background-color: darksalmon;
 }
+.task{
+  font-weight: bold;
+}
+.task-done{
+  font-weight: normal;
+  text-decoration: line-through;
+}

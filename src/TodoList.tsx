@@ -33,7 +33,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                     onChange={changeTaskStatus}
                     type="checkbox"
                     checked={task.isDone}/>
-                <span>{task.title}</span>
+                <span className={task.isDone ? "task-done" : "task"}>{task.title}</span>
                 <button
                     onClick={removeTaskHandler}>x
                 </button>

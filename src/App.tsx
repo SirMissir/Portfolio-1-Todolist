@@ -41,17 +41,18 @@ function App(): JSX.Element {
         setFilter(filter)
     }
 
-    let tasksForRender: Array<TaskType> = []
-    if (filter === "all") {
-        tasksForRender = tasks
-    }
-    if (filter === "active") {
-        tasksForRender = tasks.filter(t => t.isDone === false)
-    }
-    if (filter === "completed") {
-        tasksForRender = tasks.filter(t => t.isDone === true)
+    const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
+        switch (filterValue) {
+            case "active":
+                return  tasksList.filter(t => !t.isDone )
+            case "completed":
+                return tasksList.filter(t => t.isDone )
+            default:
+                return tasksList
+        }
     }
 
+    let tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks,filter)
 
     return (
         <div className="App">

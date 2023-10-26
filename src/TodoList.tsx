@@ -46,7 +46,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
     })
     const maxTitleLength = 20
     const recommendedTitleLength = 10
-    const isAddTaskNotPossible = title.length === 0 || title.length > maxTitleLength
+    const isAddTaskNotPossible = title.length === 0 || title.length > maxTitleLength || error
 
 
     const addTaskHandler = () => {
@@ -70,7 +70,8 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
     const longTitleWarningMassage = (title.length > recommendedTitleLength && title.length <= maxTitleLength ) &&
         <div style={{color:"red"}}>Title should be shorter</div>
     const longTitleErrorMassage = title.length > maxTitleLength &&
-        <div style={{color:"lightgoldenrodyellow"}}>Title is too long !!!</div>
+        <div style={{color:"red"}}>Title is too long !!!</div>
+    const errorMessage = error && <div style={{color: "red"}}>Title is hard required</div>
 
 
     return (
@@ -90,6 +91,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                         onClick={addTaskHandler} >+</button>
                     {longTitleWarningMassage }
                     {longTitleErrorMassage}
+                    {errorMessage}
 
                 </div>
                 <ul>

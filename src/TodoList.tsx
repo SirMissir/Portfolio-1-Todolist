@@ -15,6 +15,7 @@ type TodoListPropsType = {
 const TodoList: React.FC<TodoListPropsType> = (props) => {
 
     const [title,setTitle]= useState<string>("")
+    const [error,setError]= useState<boolean>(false)
 
     let isAllTasksNotIsDone = true // все не выполнено, change background-color todolist
     for (let i = 0; i < props.tasks.length; i++) {
@@ -49,10 +50,18 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
 
 
     const addTaskHandler = () => {
-        props.addTask(title)
-         setTitle("")
+        const trimmedTitle = title.trim()
+        if(trimmedTitle){
+            props.addTask(trimmedTitle)
+        } else {
+            setError(true)
+        }
+        setTitle("")
      }
-    const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
+        error && setError(false)
+        setTitle(e.currentTarget.value)
+    }
     const onKeyDownAddTaskHandler = isAddTaskNotPossible
         ? undefined
         :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
@@ -74,6 +83,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                         value={title}
                         onChange={setLocalTitleHandler}
                         onKeyDown = {onKeyDownAddTaskHandler}
+                        className={error ? "input-error" : ""}
                     />
                     <button
                         disabled={isAddTaskNotPossible}

@@ -58,6 +58,7 @@ function App(): JSX.Element {
             <TodoList
                 title={"What to learn"}
                 tasks={tasksForRender}
+                filter={filter}
                 removeTask={removeTask}
                 changeTodolistFilter={changeTodolistFilter}
                 addTask={addTask}

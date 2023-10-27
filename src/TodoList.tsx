@@ -28,9 +28,8 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
 
     const todoListItems: Array<JSX.Element> = props.tasks.map((task) => {
         const removeTaskHandler = () => props.removeTask(task.id)
-        const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
-
-
+        const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>
+            props.changeTaskStatus(task.id, e.currentTarget.checked)
         return (
             <li>
                 <input

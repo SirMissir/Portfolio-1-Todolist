@@ -9,11 +9,22 @@ export type TaskType = {
     isDone: boolean
 }
 
+type TodoListType = {
+    id:string
+    title:string
+    filter:FilterValuesType
+}
+
 export type FilterValuesType = "all" | "active" | "completed"
 
 
 function App(): JSX.Element {
-    console.log(v1())
+
+    let [todolist,setTodolist]=useState<Array<TodoListType>>([
+        {id:v1(),title:'What to learn',filter:'all'},
+        {id:v1(),title:'What to buy',filter:'active'}
+    ])
+
     const [tasks, setTasks] = useState([
         {id: v1(), title: "HTML & CSS", isDone: false},
         {id: v1(), title: "Sass & SCSS", isDone: false},
@@ -34,14 +45,11 @@ function App(): JSX.Element {
     const changeTaskStatus = (taskId: string, newIsDone: boolean) =>{
         setTasks(tasks.map(t => t.id === taskId ? {...t,isDone: newIsDone} : t))
     }
-
-    const [filter, setFilter] = useState<"all" | "active" | "completed">("all")
-
+    // const [filter, setFilter] = useState<FilterValuesType>("all")
     const changeTodolistFilter = (filter:FilterValuesType) => {
         setFilter(filter)
     }
-
-    const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
+    const getFilterTaskForRender = (todolist, filterValue: FilterValuesType) => {
         switch (filterValue) {
             case "active":
                 return  tasksList.filter(t => !t.isDone )
@@ -51,20 +59,23 @@ function App(): JSX.Element {
                 return tasksList
         }
     }
-
-    let tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks,filter)
-
     return (
         <div className="App">
-            <TodoList
-                title={"What to learn"}
-                tasks={tasksForRender}
-                filter={filter}
-                removeTask={removeTask}
-                changeTodolistFilter={changeTodolistFilter}
-                addTask={addTask}
-                changeTaskStatus={changeTaskStatus}
-            />
+            {todolist.map(el=>{
+                debugger
+                return(
+                    <TodoList
+                        title={el.title}
+                        tasks={getFilterTaskForRender(tasks,filter)}
+                        filter={el.filter}
+                        removeTask={removeTask}
+                        changeTodolistFilter={changeTodolistFilter}
+                        addTask={addTask}
+                        changeTaskStatus={changeTaskStatus}
+                    />
+                )
+            })}
+
             {/*<TodoList title={ "What to buy"} tasks={tasks}/>*/}
             {/*<TodoList title={ "What to read"}/>*/}
         </div>

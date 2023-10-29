@@ -52,9 +52,9 @@ function App(): JSX.Element {
     const getFilterTaskForRender = (todolist, filterValue: FilterValuesType) => {
         switch (filterValue) {
             case "active":
-                return  tasksList.filter(t => !t.isDone )
+                return  todolist[0].filter(t => !t.isDone )
             case "completed":
-                return tasksList.filter(t => t.isDone )
+                return todolist[1].filter(t => t.isDone )
             default:
                 return tasksList
         }

@@ -45,16 +45,16 @@ function App(): JSX.Element {
     const changeTaskStatus = (taskId: string, newIsDone: boolean) =>{
         setTasks(tasks.map(t => t.id === taskId ? {...t,isDone: newIsDone} : t))
     }
-    // const [filter, setFilter] = useState<FilterValuesType>("all")
+    //const [filter, setFilter] = useState<FilterValuesType>("all")
     const changeTodolistFilter = (filter:FilterValuesType) => {
-        setFilter(filter)
+        // setFilter(filter)
     }
-    const getFilterTaskForRender = (todolist, filterValue: FilterValuesType) => {
+    const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
         switch (filterValue) {
             case "active":
-                return  todolist[0].filter(t => !t.isDone )
+                return  tasksList.filter(t => !t.isDone )
             case "completed":
-                return todolist[1].filter(t => t.isDone )
+                return tasksList.filter(t => t.isDone )
             default:
                 return tasksList
         }
@@ -62,7 +62,6 @@ function App(): JSX.Element {
     return (
         <div className="App">
             {todolist.map(el=>{
-                debugger
                 return(
                     <TodoList
                         title={el.title}

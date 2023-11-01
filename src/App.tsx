@@ -89,13 +89,17 @@ function App(): JSX.Element {
                 return tasksList
         }
     }
+
+
     return (
         <div className="App">
             {todoLists.map(el=>{
+                const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id],el.filter)
                 return(
                     <TodoList
+                        todoListId={el.id}
                         title={el.title}
-                        tasks={getFilterTaskForRender(tasks,filter)}
+                        tasks={tasksForRender}
                         filter={el.filter}
                         removeTask={removeTask}
                         changeTodolistFilter={changeTodolistFilter}

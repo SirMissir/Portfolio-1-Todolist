@@ -28,8 +28,8 @@ function App(): JSX.Element {
     const todoListsId_2 = v1()
 
     let [todoLists,setTodoLists]=useState<Array<TodoListType>>([
-        {id:v1(),title:'What to learn',filter:'all'},
-        {id:v1(),title:'What to buy',filter:'active'}
+        {id:todoListsId_1,title:'What to learn',filter:'all'},
+        {id:todoListsId_2,title:'What to buy',filter:'active'}
     ])
     const [tasks,setTasks] = useState<TaskStateType>({
         [todoListsId_1]:[
@@ -97,14 +97,18 @@ function App(): JSX.Element {
                 const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id],el.filter)
                 return(
                     <TodoList
+                        key={el.id}
+
                         todoListId={el.id}
                         title={el.title}
                         tasks={tasksForRender}
                         filter={el.filter}
+
                         removeTask={removeTask}
                         changeTodolistFilter={changeTodolistFilter}
                         addTask={addTask}
                         changeTaskStatus={changeTaskStatus}
+                        removeTodolist={removeTodolist}
                     />
                 )
             })}

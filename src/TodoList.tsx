@@ -63,6 +63,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
         error && setError(false)
         setTitle(e.currentTarget.value)
     }
+    const removeTodolist = () =>props.removeTodolist(props.todoListId)
     const onKeyDownAddTaskHandler = isAddTaskNotPossible
         ? undefined
         :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
@@ -78,7 +79,10 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
     return (
         <div>
             <div className={todoClasses}>
-                <h3>{props.title}</h3>
+                <h3>
+                    {props.title}
+                    <button onClick={removeTodolist}>x</button>
+                </h3>
                 <div>
                     <input
                         placeholder="Enter task title,please"

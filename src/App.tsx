@@ -112,9 +112,6 @@ function App(): JSX.Element {
                     />
                 )
             })}
-
-            {/*<TodoList title={ "What to buy"} tasks={tasks}/>*/}
-            {/*<TodoList title={ "What to read"}/>*/}
         </div>
     );
 }

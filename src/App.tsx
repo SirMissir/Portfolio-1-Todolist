@@ -47,7 +47,15 @@ function App(): JSX.Element {
     })
 
 
-
+    const removeTask = (taskId: string, todoListId: string) => {
+        // const tasksForUpdate: Array<TaskType> = tasks[todoListId]
+        // const resultOfUpdate: Array<TaskType> = tasksForUpdate.filter((task) => task.id !== taskId)
+        // const copyTasks = {...tasks}
+        // copyTasks[todoListId] = resultOfUpdate
+        // setTasks(copyTasks)
+        //
+        setTasks({...tasks, [todoListId]: tasks[todoListId].filter((task) => task.id !== taskId)})
+    }
     const addTask = (title: string, todoListId: string) => {
         const newTask: TaskType = {id: v1(), title:title, isDone:false}
         // const tasksForUpdate: Array<TaskType> = tasks[todoListId]
@@ -58,18 +66,11 @@ function App(): JSX.Element {
         //
         setTasks({...tasks, [todoListId]: [newTask, ...tasks[todoListId]]})
     }
-    const removeTask = (taskId: string, todoListId: string) => {
-        // const tasksForUpdate: Array<TaskType> = tasks[todoListId]
-        // const resultOfUpdate: Array<TaskType> = tasksForUpdate.filter((task) => task.id !== taskId)
-        // const copyTasks = {...tasks}
-        // copyTasks[todoListId] = resultOfUpdate
-        // setTasks(copyTasks)
-        //
-        setTasks({...tasks, [todoListId]: tasks[todoListId].filter((task) => task.id !== taskId)})
-    }
     const changeTaskStatus = (taskId: string, newIsDone: boolean, todoListId: string) =>{
         setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t,isDone: newIsDone} : t)})
     }
+    const changeTaskTitle = () => {}
+
     const changeTodolistFilter = (filter:FilterValuesType, todoListId: string) => {
         setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, filter:filter} : tl))
     }
@@ -77,6 +78,8 @@ function App(): JSX.Element {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListId))
         delete tasks[todoListId]
     }
+    const changeTodolistTitle = () => {}
+    const addTodolist = ()=>{}
 
 
     const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {

@@ -1,23 +1,28 @@
 import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
-import {FilterValuesType, TaskType} from "./App";
+import {FilterValuesType} from "./App";
+import AddItemForms from "./AddItemForms";
+
+
 
 type TodoListPropsType = {
     todoListId: string
     title: string
     tasks: Array<TaskType>
+    filter: FilterValuesType
     removeTask: (taskId: string, todoListId: string) => void
     changeTodolistFilter: (filter:FilterValuesType, todoListId: string) => void
-    addTask:(title:string, todoListId: string) => void
     changeTaskStatus:(taskId: string, newIsDone: boolean, todoListId: string) => void
-    filter: FilterValuesType
+    addTask:(title:string, todoListId: string) => void
     removeTodolist: (todoListId: string) => void
 }
 
+export type TaskType = {
+    id: string
+    title: string
+    isDone:boolean
+}
 
 const TodoList: React.FC<TodoListPropsType> = (props) => {
-
-    const [title,setTitle]= useState<string>("")
-    const [error,setError]= useState<boolean>(false)
 
     let isAllTasksNotIsDone = true // все не выполнено, change background-color todolist
     for (let i = 0; i < props.tasks.length; i++) {
@@ -45,36 +50,11 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
             </li>
         )
     })
-    const maxTitleLength = 20
-    const recommendedTitleLength = 10
-    const isAddTaskNotPossible = title.length === 0 || title.length > maxTitleLength || error
 
-
-    const addTaskHandler = () => {
-        const trimmedTitle = title.trim()
-        if(trimmedTitle){
-            props.addTask(trimmedTitle, props.todoListId)
-        } else {
-            setError(true)
-        }
-        setTitle("")
+    const addTask = (title:string) => {
+            props.addTask(title, props.todoListId)
      }
-    const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
-        error && setError(false)
-        setTitle(e.currentTarget.value)
-    }
     const removeTodolist = () =>props.removeTodolist(props.todoListId)
-    const onKeyDownAddTaskHandler = isAddTaskNotPossible
-        ? undefined
-        :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
-
-
-    const longTitleWarningMassage = (title.length > recommendedTitleLength && title.length <= maxTitleLength ) &&
-        <div style={{color:"red"}}>Title should be shorter</div>
-    const longTitleErrorMassage = title.length > maxTitleLength &&
-        <div style={{color:"red"}}>Title is too long !!!</div>
-    const errorMessage = error && <div style={{color: "red"}}>Title is hard required</div>
-
 
     return (
         <div>
@@ -83,22 +63,8 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                     {props.title}
                     <button onClick={removeTodolist}>x</button>
                 </h3>
-                <div>
-                    <input
-                        placeholder="Enter task title,please"
-                        value={title}
-                        onChange={setLocalTitleHandler}
-                        onKeyDown = {onKeyDownAddTaskHandler}
-                        className={error ? "input-error" : ""}
-                    />
-                    <button
-                        disabled={isAddTaskNotPossible}
-                        onClick={addTaskHandler} >+</button>
-                    {longTitleWarningMassage }
-                    {longTitleErrorMassage}
-                    {errorMessage}
-
-                </div>
+                <AddItemForms addItem={addTask} recommendedTitleLength={10} maxTitleLength={20}/>
+                {/*<AddItemForms addItem={addTask} recommendedTitleLength={15} maxTitleLength={20}/>*/}
                 <ul>
                     {todoListItems}
                 </ul>

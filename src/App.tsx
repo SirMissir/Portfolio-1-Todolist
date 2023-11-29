@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import TodoList from "./TodoList";
 import {v1} from 'uuid';
+import AddItemForms from "./AddItemForms";
 
 export type TaskType = {
     id: string
@@ -15,14 +16,13 @@ type TodoListType = {
     filter:FilterValuesType
 }
 
+
+
+
 type TaskStateType = {
     [todolistId:string]: Array<TaskType>
 }
-
 export type FilterValuesType = "all" | "active" | "completed"
-
-
-
 function App(): JSX.Element {
     const todoListsId_1 = v1()
     const todoListsId_2 = v1()
@@ -45,6 +45,7 @@ function App(): JSX.Element {
             {id: v1(), title: "Beer", isDone: true},
         ],
     })
+
 
 
     const removeTask = (taskId: string, todoListId: string) => {
@@ -79,7 +80,14 @@ function App(): JSX.Element {
         delete tasks[todoListId]
     }
     const changeTodolistTitle = () => {}
-    const addTodolist = ()=>{}
+    const addTodoList = (title:string) => {
+        const newTodo: TodoListType ={
+            id: v1(),
+            title:title,
+            filter: "all"
+        }
+        setTodoLists([...todoLists,newTodo])
+    }
 
 
     const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
@@ -91,30 +99,33 @@ function App(): JSX.Element {
             default:
                 return tasksList
         }
-    }
+    };
 
+
+    const todoListsComponents = todoLists.map(el => {
+        const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
+        return (
+            <TodoList
+                key={el.id}
+
+                todoListId={el.id}
+                title={el.title}
+                tasks={tasksForRender}
+                filter={el.filter}
+
+                addTask={addTask}
+                removeTask={removeTask}
+                changeTaskStatus={changeTaskStatus}
+                removeTodolist={removeTodolist}
+                changeTodolistFilter={changeTodolistFilter}
+            />
+        )
+    });
 
     return (
         <div className="App">
-            {todoLists.map(el=>{
-                const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id],el.filter)
-                return(
-                    <TodoList
-                        key={el.id}
-
-                        todoListId={el.id}
-                        title={el.title}
-                        tasks={tasksForRender}
-                        filter={el.filter}
-
-                        removeTask={removeTask}
-                        changeTodolistFilter={changeTodolistFilter}
-                        addTask={addTask}
-                        changeTaskStatus={changeTaskStatus}
-                        removeTodolist={removeTodolist}
-                    />
-                )
-            })}
+                <AddItemForms addItem={addTodoList} recommendedTitleLength={15} maxTitleLength={20}/>
+                {todoListsComponents}
         </div>
     );
 }

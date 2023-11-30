@@ -10,9 +10,11 @@ type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
     filter: FilterValuesType
+    changeTaskTitle: (taskId: string, newTitle: string, todoListId: string)=>void
     removeTask: (taskId: string, todoListId: string) => void
     changeTodolistFilter: (filter:FilterValuesType, todoListId: string) => void
     changeTaskStatus:(taskId: string, newIsDone: boolean, todoListId: string) => void
+    changeTodolistTitle: (newTitle:string, todoListId: string) =>void
     addTask:(title:string, todoListId: string) => void
     removeTodolist: (todoListId: string) => void
 }
@@ -38,13 +40,17 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
         const removeTaskHandler = () => props.removeTask(task.id, props.todoListId)
         const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>
             props.changeTaskStatus(task.id, e.currentTarget.checked, props.todoListId)
+        const changeTaskTitle = ( newTitle:string) => props.changeTaskTitle(task.id, newTitle, props.todoListId)
         return (
-            <li>
+            <li key={task.id}>
                 <input
                     onChange={changeTaskStatus}
                     type="checkbox"
                     checked={task.isDone}/>
-                <EditableSpan title={task.title} classes={task.isDone ? "task-done" : "task"}/>
+                <EditableSpan
+                    title={task.title}
+                    changeTitle={changeTaskTitle}
+                    classes={task.isDone ? "task-done" : "task"}/>
                 <button
                     onClick={removeTaskHandler}>x
                 </button>
@@ -56,16 +62,15 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
             props.addTask(title, props.todoListId)
      }
     const removeTodolist = () =>props.removeTodolist(props.todoListId)
-
+    const changeTodolistTitle =( newTitle:string) => props.changeTodolistTitle(newTitle,props.todoListId)
     return (
         <div>
             <div className={todoClasses}>
                 <h3>
-                    {props.title}
+                    <EditableSpan title={props.title}  changeTitle={changeTodolistTitle}/>
                     <button onClick={removeTodolist}>x</button>
                 </h3>
                 <AddItemForms addItem={addTask} recommendedTitleLength={10} maxTitleLength={20}/>
-                {/*<AddItemForms addItem={addTask} recommendedTitleLength={15} maxTitleLength={20}/>*/}
                 <ul>
                     {todoListItems}
                 </ul>

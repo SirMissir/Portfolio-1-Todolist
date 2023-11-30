@@ -1,6 +1,7 @@
 import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from "./App";
 import AddItemForms from "./AddItemForms";
+import EditableSpan from "./EditableSpan";
 
 
 
@@ -43,7 +44,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                     onChange={changeTaskStatus}
                     type="checkbox"
                     checked={task.isDone}/>
-                <span className={task.isDone ? "task-done" : "task"}>{task.title}</span>
+                <EditableSpan title={task.title} classes={task.isDone ? "task-done" : "task"}/>
                 <button
                     onClick={removeTaskHandler}>x
                 </button>

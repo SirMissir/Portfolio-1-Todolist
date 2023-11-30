@@ -70,7 +70,8 @@ function App(): JSX.Element {
     const changeTaskStatus = (taskId: string, newIsDone: boolean, todoListId: string) =>{
         setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t,isDone: newIsDone} : t)})
     }
-    const changeTaskTitle = () => {}
+    const changeTaskTitle = (taskId: string, newTitle: string, todoListId: string) =>{
+        setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t,title: newTitle} : t)})}
 
     const changeTodolistFilter = (filter:FilterValuesType, todoListId: string) => {
         setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, filter:filter} : tl))
@@ -79,7 +80,10 @@ function App(): JSX.Element {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListId))
         delete tasks[todoListId]
     }
-    const changeTodolistTitle = () => {}
+
+    const changeTodolistTitle = (newTitle:string, todoListId: string) => {
+        setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, title:newTitle} : tl))
+    }
     const addTodoList = (title:string) => {
         const newTodo: TodoListType ={
             id: v1(),
@@ -132,4 +136,5 @@ function App(): JSX.Element {
     );
 }
 
-export default App;
+
+export default App

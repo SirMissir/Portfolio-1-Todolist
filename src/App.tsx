@@ -87,6 +87,7 @@ function App(): JSX.Element {
             filter: "all"
         }
         setTodoLists([...todoLists,newTodo])
+        setTasks({...tasks,[newTodo.id]:[]})
     }
 
 
@@ -126,6 +127,7 @@ function App(): JSX.Element {
         <div className="App">
                 <AddItemForms addItem={addTodoList} recommendedTitleLength={15} maxTitleLength={20}/>
                 {todoListsComponents}
+
         </div>
     );
 }

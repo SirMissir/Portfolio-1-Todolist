@@ -1,4 +1,6 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
+// import {Button} from "@material-ui/core/Button";
+import Button from '@mui/material/Button';
 
 type AddItemFormPropsType = {
     addItem: (title:string)=>void
@@ -41,10 +43,12 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
                     onKeyDown = {onKeyDownAddTaskHandler}
                     className={error ? "input-error" : ""}
                 />
-                <button
-                    disabled={isAddTaskNotPossible}
-                    onClick={addTaskHandler}
-                >+</button>
+            <Button
+                disabled={isAddTaskNotPossible}
+                onClick={addTaskHandler}
+                variant={"contained"}
+                size="small"
+            >+</Button>
                 {longTitleWarningMassage }
                 {longTitleErrorMassage}
                 {errorMessage}

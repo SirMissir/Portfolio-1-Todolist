@@ -1,5 +1,4 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
-// import {Button} from "@material-ui/core/Button";
 import Button from '@mui/material/Button';
 
 type AddItemFormPropsType = {
@@ -48,6 +47,7 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
                 onClick={addTaskHandler}
                 variant={"contained"}
                 size="small"
+                style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
             >+</Button>
                 {longTitleWarningMassage }
                 {longTitleErrorMassage}

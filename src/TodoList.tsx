@@ -2,6 +2,12 @@ import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from "./App";
 import AddItemForms from "./AddItemForms";
 import EditableSpan from "./EditableSpan";
+// import {IconButton} from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AlarmIcon from '@mui/icons-material/Alarm';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 
@@ -51,9 +57,9 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                     title={task.title}
                     changeTitle={changeTaskTitle}
                     classes={task.isDone ? "task-done" : "task"}/>
-                <button
-                    onClick={removeTaskHandler}>x
-                </button>
+                <IconButton aria-label="delete" onClick={removeTaskHandler}>
+                    <DeleteIcon />
+                </IconButton>
             </li>
         )
     })

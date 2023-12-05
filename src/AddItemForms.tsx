@@ -33,6 +33,13 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
     const longTitleErrorMassage = title.length > maxTitleLength &&
         <div style={{color:"red"}}>Title is too long !!!</div>
     const errorMessage = error && <div style={{color: "red"}}>Title is hard required</div>
+
+    const stylesButton ={
+        maxWidth: '22px',
+        maxHeight: '22px',
+        minWidth: '22px',
+        minHeight: '22px'
+    }
     return (
         <div>
                 <input
@@ -47,7 +54,7 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
                 onClick={addTaskHandler}
                 variant={"contained"}
                 size="small"
-                style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
+                style={stylesButton}
             >+</Button>
                 {longTitleWarningMassage }
                 {longTitleErrorMassage}

@@ -1,5 +1,6 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 type AddItemFormPropsType = {
     addItem: (title:string)=>void
@@ -42,13 +43,20 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
     }
     return (
         <div>
-                <input
-                    placeholder="Enter task title,please"
-                    value={title}
-                    onChange={setLocalTitleHandler}
-                    onKeyDown = {onKeyDownAddTaskHandler}
-                    className={error ? "input-error" : ""}
-                />
+            <TextField
+                id="outlined-basic"
+                variant="outlined"
+                label="Multiline"
+
+                placeholder="Enter task title,please"
+                // defaultValue="Enter task title,please"
+                value={title}
+                onChange={setLocalTitleHandler}
+                onKeyDown = {onKeyDownAddTaskHandler}
+                className={error ? "input-error" : ""}
+                size = {"small"}
+
+            />
             <Button
                 disabled={isAddTaskNotPossible}
                 onClick={addTaskHandler}

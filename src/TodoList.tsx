@@ -100,18 +100,6 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                     >
                         Completed
                     </Button>
-                    {/*<button className={props.filter === "all" ? "btn-active" : ""} onClick={() => {*/}
-                    {/*    props.changeTodolistFilter("all", props.todoListId)*/}
-                    {/*}} >*/}
-                    {/*    All</button>*/}
-                    {/*<button className={props.filter === "active" ? "btn-active" : ""} onClick={() => {*/}
-                    {/*    props.changeTodolistFilter("active", props.todoListId)*/}
-                    {/*}}>*/}
-                    {/*    Active</button>*/}
-                    {/*<button className={props.filter === "completed" ? "btn-active" : ""} onClick={() => {*/}
-                    {/*    props.changeTodolistFilter("completed", props.todoListId)*/}
-                    {/*}}>*/}
-                    {/*    Completed</button>*/}
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, {ChangeEvent, FC, useState} from 'react';
+import TextField from '@mui/material/TextField';
 type EditableSpanPropsType = {
     title:string
     classes?: string
@@ -23,12 +24,23 @@ const EditableSpan: FC<EditableSpanPropsType> = (
     }
 
     return(
-        isEditMode
-            ? <input
-            value={value}
-            autoFocus
-            onChange={setValueHandler}
-            onBlur={toggleEditMode}
+        isEditMode ?
+            // <input
+            // value={value}
+            // autoFocus
+            // onChange={setValueHandler}
+            // onBlur={toggleEditMode}
+            // />
+            <TextField
+                id="outlined-multiline-static"
+                label="Multiline"
+                multiline
+                rows={4}
+                defaultValue="Default Value"
+                value={value}
+                autoFocus
+                onChange={setValueHandler}
+                onBlur={toggleEditMode}
             />
             : <span
                 onDoubleClick={toggleEditMode}

@@ -43,6 +43,8 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
         const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>
             props.changeTaskStatus(task.id, e.currentTarget.checked, props.todoListId)
         const changeTaskTitle = ( newTitle:string) => props.changeTaskTitle(task.id, newTitle, props.todoListId)
+
+
         return (
             <li key={task.id}>
                 <input

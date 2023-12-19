@@ -44,6 +44,7 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
     return (
         <div>
             <TextField
+                error = {!! error}
                 id="outlined-basic"
                 variant="outlined"
                 label="Multiline"

@@ -3,6 +3,15 @@ import './App.css';
 import TodoList from "./TodoList";
 import {v1} from 'uuid';
 import AddItemForms from "./AddItemForms";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 
 export type TaskType = {
     id: string
@@ -106,6 +115,29 @@ function App(): JSX.Element {
         }
     };
 
+    function ButtonAppBar() {
+        return (
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            News
+                        </Typography>
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        );
+    }
 
     const todoListsComponents = todoLists.map(el => {
         const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
@@ -131,9 +163,15 @@ function App(): JSX.Element {
 
     return (
         <div className="App">
-                <AddItemForms addItem={addTodoList} recommendedTitleLength={15} maxTitleLength={20}/>
-                {todoListsComponents}
-
+            <ButtonAppBar/>
+            <Container fixed>
+                <Grid container>
+                    <AddItemForms addItem={addTodoList} recommendedTitleLength={15} maxTitleLength={20}/>
+                </Grid>
+                <Grid container>
+                    {todoListsComponents}
+                </Grid>
+            </Container>
         </div>
     );
 }

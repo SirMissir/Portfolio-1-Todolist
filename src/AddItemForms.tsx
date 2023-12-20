@@ -29,6 +29,7 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
     const onKeyDownAddTaskHandler = isAddTaskNotPossible
         ? undefined
         :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
+
     const longTitleWarningMassage = (title.length > recommendedTitleLength && title.length <= maxTitleLength ) &&
         <div style={{color:"red"}}>Title should be shorter</div>
     const longTitleErrorMassage = title.length > maxTitleLength &&
@@ -39,18 +40,15 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
         maxWidth: '22px',
         maxHeight: '22px',
         minWidth: '22px',
-        minHeight: '24px'
+        minHeight: '22px'
     }
     return (
         <div>
             <TextField
-                error = {!! error}
                 id="outlined-basic"
                 variant="outlined"
-                label="Multiline"
-
+                label="type smth..."
                 placeholder="Enter task title,please"
-                // defaultValue="Enter task title,please"
                 value={title}
                 onChange={setLocalTitleHandler}
                 onKeyDown = {onKeyDownAddTaskHandler}

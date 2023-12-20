@@ -1,11 +1,12 @@
 .App {
   padding: 30px;
-  display: flex;
+  /*display: flex;*/
+
 }
 
-.App > div {
-  margin-right: 50px;
-}
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
 .todolist{
   border: 8px solid hotpink;
   border-radius: 10px;

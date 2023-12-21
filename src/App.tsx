@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 export type TaskType = {
     id: string
@@ -141,7 +142,8 @@ function App(): JSX.Element {
 
     const todoListsComponents = todoLists.map(el => {
         const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
-        return (
+        return <Grid item>
+            {/*<Paper elevation={3}>*/}
             <TodoList
                 key={el.id}
 
@@ -158,17 +160,18 @@ function App(): JSX.Element {
                 changeTodolistTitle={changeTodolistTitle}
                 changeTodolistFilter={changeTodolistFilter}
             />
-        )
+        {/*</Paper>*/}
+        </Grid>
     });
 
     return (
         <div className="App">
             <ButtonAppBar/>
             <Container fixed>
-                <Grid container>
+                <Grid  container>
                     <AddItemForms addItem={addTodoList} recommendedTitleLength={15} maxTitleLength={20}/>
                 </Grid>
-                <Grid container>
+                <Grid container spacing = {2}>
                     {todoListsComponents}
                 </Grid>
             </Container>

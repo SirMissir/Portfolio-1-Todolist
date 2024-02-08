@@ -26,13 +26,11 @@ type TodoListType = {
     filter:FilterValuesType
 }
 
-
-
-
 type TaskStateType = {
     [todolistId:string]: Array<TaskType>
 }
 export type FilterValuesType = "all" | "active" | "completed"
+
 function App(): JSX.Element {
     const todoListsId_1 = v1()
     const todoListsId_2 = v1()

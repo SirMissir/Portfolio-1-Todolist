@@ -8,17 +8,11 @@ export  const todolistsReducer=(state:TodoListType[], action:todolistReducerType
             // delete tasks[todoListId]
             return state.filter(el=>el.id!==action.payload.id)
         }
-        case 'ADD-TODOLIST':{
-            // setTodoLists(todoLists.filter(tl => tl.id !== todoListId))
-            // delete tasks[todoListId]
-            const newTodo: TodoListType ={
-                            id: v1(),
-                            title:title,
-                            filter: "all"
-                        }
-            return
-            {setTodoLists([...todoLists,newTodo])
-            setTasks({...tasks,[newTodo.id]:[]})}
+        case 'ADD-TODOLIST': {
+            const newTodo: TodoListType = {id: v1(), title: action.payload.title, filter: "all"};
+            // setTodoLists([...todoLists,newTodo])
+            // setTasks({...tasks,[newTodo.id]:[]})}
+            return [...state,newTodo]
         }
         default: return state
     }

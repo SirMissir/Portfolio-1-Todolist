@@ -1,4 +1,4 @@
-import {FilterValuesType, TaskStateType} from "../App"
+import {FilterValuesType, TaskStateType, TaskType} from "../App"
 import {v1} from "uuid";
 
 export  const tasksReducer=(state:TaskStateType, action:tasksReducerType):TaskStateType=>{
@@ -7,10 +7,12 @@ export  const tasksReducer=(state:TaskStateType, action:tasksReducerType):TaskSt
             // setTasks({...tasks, [todoListId]: tasks[todoListId].filter((task) => task.id !== taskId)})
             return {...state, [action.payload.todolistId]:state[action.payload.todolistId].filter(t => t.id !==action.payload.taskId)}
         }
-        // case '': {
-        //
-        //     return state
-        // }
+        case 'ADD-TASK': {
+            const newTask: TaskType = {id: v1(), title:action.payload.title, isDone:false}
+            // setTasks({...tasks, [todoListId]: [newTask, ...tasks[todoListId]]})
+            return {...state,
+                [action.payload.todolistId]:[newTask,...state[action.payload.todolistId]]}
+        }
         // case '': {
         //
         //     return state
@@ -21,7 +23,7 @@ export  const tasksReducer=(state:TaskStateType, action:tasksReducerType):TaskSt
         default: return state
     }
 }
-type tasksReducerType=removeTasksACType
+type tasksReducerType=removeTasksACType|addTaskACType
 
 type removeTasksACType=ReturnType<typeof removeTaskAC>
 export const removeTaskAC =(taskId:string,todolistId:string)=>{
@@ -31,13 +33,13 @@ export const removeTaskAC =(taskId:string,todolistId:string)=>{
     }as const
 }
 
-// type addTodoListACType = ReturnType<typeof addTodoListAC>
-// export const addTodoListAC =(title:string)=>{
-//     return {
-//         type:'ADD-TODOLIST',
-//         payload:{title}
-//     } as const
-// }
+type addTaskACType = ReturnType<typeof addTaskAC>
+export const addTaskAC =(title:string,todolistId:string)=>{
+    return {
+        type:'ADD-TASK',
+        payload:{title,todolistId}
+    } as const
+}
 //
 // type changeTodolistTitleACType = ReturnType<typeof changeTodolistTitleAC>
 // export const changeTodolistTitleAC =(id:string,title:string)=>{

@@ -1,5 +1,6 @@
 import {FilterValuesType, TaskStateType, TaskType} from "../App"
 import {v1} from "uuid";
+import {todolistReducerType} from "./todolists-reducer";
 
 export  const tasksReducer=(state:TaskStateType, action:tasksReducerType):TaskStateType=>{
     switch (action.type) {
@@ -8,7 +9,7 @@ export  const tasksReducer=(state:TaskStateType, action:tasksReducerType):TaskSt
             return {...state, [action.payload.todolistId]:state[action.payload.todolistId].filter(t => t.id !==action.payload.taskId)}
         }
         case 'ADD-TASK': {
-            const newTask: TaskType = {id: v1(), title:action.payload.title, isDone:false}
+            const newTask: TaskType = {id: action.payload.todolistId, title:action.payload.title, isDone:false}
             // setTasks({...tasks, [todoListId]: [newTask, ...tasks[todoListId]]})
             return {...state,
                 [action.payload.todolistId]:[newTask,...state[action.payload.todolistId]]}
@@ -23,10 +24,21 @@ export  const tasksReducer=(state:TaskStateType, action:tasksReducerType):TaskSt
                 [action.payload.todolistId]:state[action.payload.todolistId].map(el => el.id === action.payload.id ? {...el,title:action.payload.title}:el)
             }
         }
+        case 'ADD-TODOLIST':{
+            return {
+                ...state,
+                [action.payload.feedId]:[]
+            }
+        }
+        case 'REMOVE-TODOLIST':{
+                let copyState = {...state}
+                delete copyState[action.payload.id]
+                return copyState
+        }
         default: return state
     }
 }
-type tasksReducerType=removeTasksACType|addTaskACType|changeTaskStatusACType|changeTaskTitleACType
+type tasksReducerType=removeTasksACType|addTaskACType|changeTaskStatusACType|changeTaskTitleACType|todolistReducerType
 
 type removeTasksACType=ReturnType<typeof removeTaskAC>
 export const removeTaskAC =(taskId:string,todolistId:string)=>{
@@ -67,3 +79,12 @@ export const changeTaskTitleAC =(id:string,title:string,todolistId:string)=>{
 //         payload: {id, filter}
 //     } as const
 // }
+
+
+let b:any ={
+    a: 1,
+    b:2
+}
+let a = b
+b={}
+console.log(b)

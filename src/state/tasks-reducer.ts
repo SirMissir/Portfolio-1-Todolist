@@ -81,10 +81,3 @@ export const changeTaskTitleAC =(id:string,title:string,todolistId:string)=>{
 // }
 
 
-let b:any ={
-    a: 1,
-    b:2
-}
-let a = b
-b={}
-console.log(b)

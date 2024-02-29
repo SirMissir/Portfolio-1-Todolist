@@ -40,11 +40,11 @@ export  const tasksReducer=(state:TaskStateType, action:tasksReducerType):TaskSt
 }
 type tasksReducerType=removeTasksACType|addTaskACType|changeTaskStatusACType|changeTaskTitleACType|todolistReducerType
 
-type removeTasksACType=ReturnType<typeof removeTaskAC>
+export type removeTasksACType=ReturnType<typeof removeTaskAC>
 export const removeTaskAC =(taskId:string,todolistId:string)=>{
     return{
         type: 'REMOVE-TASK',
-        payload:{todolistId,taskId}
+        payload:{taskId,todolistId,}
     }as const
 }
 

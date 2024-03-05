@@ -37,7 +37,7 @@ export type TaskStateType = {
 }
 export type FilterValuesType = "all" | "active" | "completed"
 
-function AppWithReducer(): JSX.Element {
+function AppWithRedux(): JSX.Element {
     const todoListsId_1 = v1()
     const todoListsId_2 = v1()
 
@@ -194,4 +194,4 @@ function AppWithReducer(): JSX.Element {
 }
 
 
-export default AppWithReducer
+export default AppWithRedux

@@ -12,17 +12,21 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import {
     addTodoListAC, changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC,
-    todolistReducerType,
-    todolistsReducer
 } from "./state/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
+import {
+    addTaskAC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    removeTaskAC,
+} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
+
+
 
 export type TaskType = {
     id: string
@@ -40,8 +44,6 @@ export type TaskStateType = {
 export type FilterValuesType = "all" | "active" | "completed"
 
 function AppWithRedux(): JSX.Element {
-    const todoListsId_1 = v1()
-    const todoListsId_2 = v1()
 
     let todoLists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
 

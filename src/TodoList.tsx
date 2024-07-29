@@ -53,11 +53,11 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                     // color="success"
                     checked={task.isDone}
                 />
-
                 <EditableSpan
                     title={task.title}
                     changeTitle={changeTaskTitle}
-                    classes={task.isDone ? "task-done" : "task"}/>
+                    classes={task.isDone ? "task-done" : "task"}
+                />
                 <IconButton aria-label="delete" size="small" onClick={removeTaskHandler}>
                     <DeleteIcon />
                 </IconButton>

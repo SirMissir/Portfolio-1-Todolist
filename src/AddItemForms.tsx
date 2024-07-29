@@ -9,18 +9,14 @@ type AddItemFormPropsType = {
 }
 
 const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength, maxTitleLength}) => {
-    console.log('AddItemForm Called')
-
     const [title,setTitle]= useState<string>("")
     const [error,setError]= useState<boolean>(false)
-
     const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
         error && setError(false)
         setTitle(e.currentTarget.value)
     }
 
     const isAddTaskNotPossible = title.length === 0 || title.length > maxTitleLength || error
-
     const addTaskHandler = () => {
         const trimmedTitle = title.trim()
         if(trimmedTitle){
@@ -30,7 +26,6 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
         }
         setTitle("")
     }
-
     const onKeyDownAddTaskHandler = isAddTaskNotPossible
         ? undefined
         :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()

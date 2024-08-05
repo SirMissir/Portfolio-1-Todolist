@@ -79,7 +79,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                         <DeleteIcon />
                     </IconButton>
                 </h3>
-                <AddItemForms addItem={addTask} recommendedTitleLength={10} maxTitleLength={20}/>
+                <AddItemForms addItem={addTask} recommendedTitleLength={5} maxTitleLength={8}/>
                 <ul>
                     {todoListItems}
                 </ul>

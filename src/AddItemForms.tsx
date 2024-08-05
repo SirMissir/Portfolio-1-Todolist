@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, FC, KeyboardEvent, memo, useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -8,31 +8,36 @@ type AddItemFormPropsType = {
     maxTitleLength:number
 }
 
-const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength, maxTitleLength}) => {
+const AddItemForms = memo( (props:AddItemFormPropsType) => {
+        console.log('err')
     const [title,setTitle]= useState<string>("")
     const [error,setError]= useState<boolean>(false)
+
+
     const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
         error && setError(false)
         setTitle(e.currentTarget.value)
     }
 
-    const isAddTaskNotPossible = title.length === 0 || title.length > maxTitleLength || error
+    const isAddTaskNotPossible = title.length === 0 || title.length > props.maxTitleLength || error
+
     const addTaskHandler = () => {
+        console.log('add TaskHandler')
         const trimmedTitle = title.trim()
         if(trimmedTitle){
-            addItem(trimmedTitle)
+            props.addItem(trimmedTitle)
+            setTitle("")
         } else {
             setError(true)
         }
-        setTitle("")
     }
-    const onKeyDownAddTaskHandler = isAddTaskNotPossible
-        ? undefined
-        :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
 
-    const longTitleWarningMassage = (title.length > recommendedTitleLength && title.length <= maxTitleLength ) &&
+    const onKeyDownAddTaskHandler =
+        isAddTaskNotPossible ? undefined :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
+
+    const longTitleWarningMassage = (title.length > props.recommendedTitleLength && title.length <= props.maxTitleLength ) &&
         <div style={{color:"red"}}>Title should be shorter</div>
-    const longTitleErrorMassage = title.length > maxTitleLength &&
+    const longTitleErrorMassage = title.length > props.maxTitleLength &&
         <div style={{color:"red"}}>Title is too long !!!</div>
     const errorMessage = error && <div style={{color: "red"}}>Title is hard required</div>
 
@@ -68,6 +73,6 @@ const AddItemForms:FC<AddItemFormPropsType> = ({addItem, recommendedTitleLength,
                 {errorMessage}
         </div>
     );
-};
+});
 
 export default AddItemForms;

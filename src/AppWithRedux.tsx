@@ -1,4 +1,4 @@
-import React, {Reducer, useReducer, useState} from 'react';
+import React, {Reducer, useCallback, useReducer, useState} from 'react';
 import './App.css';
 import TodoList from "./TodoList";
 import {v1} from 'uuid';
@@ -54,9 +54,9 @@ function AppWithRedux(): JSX.Element {
     const removeTask = (taskId: string, todoListId: string) => {
         dispatch(removeTaskAC(taskId,todoListId))
     }
-    const addTask = (title: string, todoListId: string) => {
-        dispatch(addTaskAC(title,todoListId))
-    }
+    const addTask = useCallback((title: string, todoListId: string) => {
+        dispatch(addTaskAC(title,todoListId))},[])
+
     const changeTaskStatus = (taskId: string, newIsDone: boolean, todoListId: string) =>{
         dispatch(changeTaskStatusAC(taskId,newIsDone,todoListId))
     }
@@ -74,10 +74,9 @@ function AppWithRedux(): JSX.Element {
     const changeTodolistTitle = (newTitle:string, todoListId: string) => {
         dispatch(changeTodolistTitleAC (newTitle,todoListId))
     }
-    const addTodoList = (title:string) => {
+    const addTodoList = useCallback((title:string) => {
         dispatch(addTodoListAC(title))
-
-    }
+    },[dispatch])
 
 
     const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
@@ -144,7 +143,7 @@ function AppWithRedux(): JSX.Element {
             <ButtonAppBar/>
             <Container fixed>
                 <Grid  container>
-                    <AddItemForms addItem={addTodoList} recommendedTitleLength={15} maxTitleLength={20}/>
+                    <AddItemForms addItem={addTodoList} recommendedTitleLength={5} maxTitleLength={8}/>
                 </Grid>
                 <Grid container spacing = {2}>
                     {todoListsComponents}

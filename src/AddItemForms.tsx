@@ -9,22 +9,13 @@ type AddItemFormPropsType = {
 }
 
 const AddItemForms = memo( (props:AddItemFormPropsType) => {
-        console.log('err')
+        console.log('AddItemForm')
     const [title,setTitle]= useState<string>("")
     const [error,setError]= useState<boolean>(false)
 
-
-    const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
-        error && setError(false)
-        setTitle(e.currentTarget.value)
-    }
-
-    const isAddTaskNotPossible = title.length === 0 || title.length > props.maxTitleLength || error
-
     const addTaskHandler = () => {
-        console.log('add TaskHandler')
         const trimmedTitle = title.trim()
-        if(trimmedTitle){
+        if(trimmedTitle ){
             props.addItem(trimmedTitle)
             setTitle("")
         } else {
@@ -32,8 +23,17 @@ const AddItemForms = memo( (props:AddItemFormPropsType) => {
         }
     }
 
+    const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
+        error && setError(false)
+        setTitle(e.currentTarget.value)
+    }
+    const isAddTaskNotPossible = title.length === 0 || title.length > props.maxTitleLength || error
+
     const onKeyDownAddTaskHandler =
         isAddTaskNotPossible ? undefined :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
+
+
+
 
     const longTitleWarningMassage = (title.length > props.recommendedTitleLength && title.length <= props.maxTitleLength ) &&
         <div style={{color:"red"}}>Title should be shorter</div>

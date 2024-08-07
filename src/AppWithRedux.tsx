@@ -1,7 +1,6 @@
-import React, {Reducer, useCallback, useReducer, useState} from 'react';
+import React, { useCallback} from 'react';
 import './App.css';
 import TodoList from "./TodoList";
-import {v1} from 'uuid';
 import AddItemForms from "./AddItemForms";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -116,6 +115,7 @@ function AppWithRedux(): JSX.Element {
 
     const todoListsComponents = todoLists.map(el => {
         const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
+
         return <Grid item>
             {/*<Paper elevation={3}>*/}
             <TodoList
@@ -143,7 +143,7 @@ function AppWithRedux(): JSX.Element {
             <ButtonAppBar/>
             <Container fixed>
                 <Grid  container>
-                    <AddItemForms addItem={addTodoList} recommendedTitleLength={5} maxTitleLength={8}/>
+                    <AddItemForms addItem={addTodoList} />
                 </Grid>
                 <Grid container spacing = {2}>
                     {todoListsComponents}

@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useCallback} from 'react';
-import {FilterValuesType} from "./App";
+import React, {ChangeEvent, memo, useCallback} from 'react';
+import {FilterValuesType} from "./AppWithRedux";
 import AddItemForms from "./AddItemForms";
 import EditableSpan from "./EditableSpan";
 import IconButton from '@mui/material/IconButton';
@@ -28,8 +28,8 @@ export type TaskType = {
     isDone:boolean
 }
 
-const TodoList: React.FC<TodoListPropsType> = (props) => {
-
+const TodoList =memo( (props:TodoListPropsType) => {
+    console.log('Todolist')
     let isAllTasksNotIsDone = true // все не выполнено, change background-color todolist
     for (let i = 0; i < props.tasks.length; i++) {
         if (props.tasks[i].isDone) {
@@ -37,6 +37,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
             break;
         }
     }
+
     const todoClasses = isAllTasksNotIsDone ? "todolist-empty" : "todolist"
 
     const todoListItems: Array<JSX.Element> = props.tasks.map((task) => {
@@ -70,6 +71,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
      },[props.addTask,props.todoListId])
     const removeTodolist = () =>props.removeTodolist(props.todoListId)
     const changeTodolistTitle =( newTitle:string) => props.changeTodolistTitle(newTitle,props.todoListId)
+
     return (
         <div>
             <div className={todoClasses}>
@@ -79,7 +81,7 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                         <DeleteIcon />
                     </IconButton>
                 </h3>
-                <AddItemForms addItem={addTask} recommendedTitleLength={5} maxTitleLength={8}/>
+                <AddItemForms addItem={addTask} />
                 <ul>
                     {todoListItems}
                 </ul>
@@ -109,6 +111,6 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
             </div>
         </div>
     );
-};
+})
 
 export default TodoList;

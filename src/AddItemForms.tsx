@@ -4,16 +4,20 @@ import TextField from '@mui/material/TextField';
 
 type AddItemFormPropsType = {
     addItem: (title:string)=>void
-    recommendedTitleLength: number
-    maxTitleLength:number
+    // recommendedTitleLength: number
+    // maxTitleLength:number
 }
 
 const AddItemForms = memo( (props:AddItemFormPropsType) => {
-        console.log('AddItemForm')
+        // console.log('AddItemForm')
     const [title,setTitle]= useState<string>("")
     const [error,setError]= useState<boolean>(false)
 
+    let recommendedTitleLength=5;
+    let maxTitleLength=8;
+
     const addTaskHandler = () => {
+
         const trimmedTitle = title.trim()
         if(trimmedTitle ){
             props.addItem(trimmedTitle)
@@ -24,20 +28,21 @@ const AddItemForms = memo( (props:AddItemFormPropsType) => {
     }
 
     const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
+
         error && setError(false)
         setTitle(e.currentTarget.value)
     }
-    const isAddTaskNotPossible = title.length === 0 || title.length > props.maxTitleLength || error
 
+    const isAddTaskNotPossible = title.length === 0 || title.length > maxTitleLength || error
     const onKeyDownAddTaskHandler =
         isAddTaskNotPossible ? undefined :(e:KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && addTaskHandler()
 
 
 
 
-    const longTitleWarningMassage = (title.length > props.recommendedTitleLength && title.length <= props.maxTitleLength ) &&
+    const longTitleWarningMassage = (title.length > recommendedTitleLength && title.length <= maxTitleLength ) &&
         <div style={{color:"red"}}>Title should be shorter</div>
-    const longTitleErrorMassage = title.length > props.maxTitleLength &&
+    const longTitleErrorMassage = title.length > maxTitleLength &&
         <div style={{color:"red"}}>Title is too long !!!</div>
     const errorMessage = error && <div style={{color: "red"}}>Title is hard required</div>
 
@@ -54,12 +59,13 @@ const AddItemForms = memo( (props:AddItemFormPropsType) => {
                 variant="outlined"
                 label="type smth..."
                 placeholder="Enter task title,please"
+                size = {"small"}
+
                 value={title}
                 onChange={setLocalTitleHandler}
                 onKeyDown = {onKeyDownAddTaskHandler}
-                className={error ? "input-error" : ""}
-                size = {"small"}
 
+                className={error ? "input-error" : ""}
             />
             <Button
                 disabled={isAddTaskNotPossible}

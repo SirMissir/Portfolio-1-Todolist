@@ -50,29 +50,29 @@ function AppWithRedux(): JSX.Element {
 
     const dispatch = useDispatch()
 
-    const removeTask = (taskId: string, todoListId: string) => {
+    const removeTask = useCallback( (taskId: string, todoListId: string) => {
         dispatch(removeTaskAC(taskId,todoListId))
-    }
+    },[dispatch])
     const addTask = useCallback((title: string, todoListId: string) => {
-        dispatch(addTaskAC(title,todoListId))},[])
+        dispatch(addTaskAC(title,todoListId))},[dispatch])
 
-    const changeTaskStatus = (taskId: string, newIsDone: boolean, todoListId: string) =>{
+    const changeTaskStatus =useCallback( (taskId: string, newIsDone: boolean, todoListId: string) =>{
         dispatch(changeTaskStatusAC(taskId,newIsDone,todoListId))
-    }
-    const changeTaskTitle = (taskId: string, newTitle: string, todoListId: string) => {
+    },[dispatch])
+    const changeTaskTitle =useCallback( (taskId: string, newTitle: string, todoListId: string) => {
         dispatch(changeTaskTitleAC(taskId, newTitle, todoListId))
-    }
+    },[dispatch])
 
-    const changeTodolistFilter = (filter:FilterValuesType, todoListId: string) => {
+    const changeTodolistFilter =useCallback( (filter:FilterValuesType, todoListId: string) => {
         dispatch(changeTodolistFilterAC(filter,todoListId))
-    }
-    const removeTodolist = (todoListId: string) => {
+    },[dispatch])
+    const removeTodolist =useCallback( (todoListId: string) => {
         dispatch(removeTodolistAC(todoListId))
-    }
+    },[dispatch])
 
-    const changeTodolistTitle = (newTitle:string, todoListId: string) => {
+    const changeTodolistTitle =useCallback( (newTitle:string, todoListId: string) => {
         dispatch(changeTodolistTitleAC (newTitle,todoListId))
-    }
+    },[dispatch])
     const addTodoList = useCallback((title:string) => {
         dispatch(addTodoListAC(title))
     },[dispatch])
@@ -117,7 +117,6 @@ function AppWithRedux(): JSX.Element {
         const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
 
         return <Grid item>
-            {/*<Paper elevation={3}>*/}
             <TodoList
                 key={el.id}
 

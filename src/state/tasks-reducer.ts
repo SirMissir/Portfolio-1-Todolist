@@ -17,7 +17,6 @@ export  const tasksReducer=(state=initialState, action:tasksReducerType):TaskSta
                 [action.payload.todolistId]:[newTask,...state[action.payload.todolistId]]}
         }
         case 'CHANGE-TASK-STATUS': {
-            debugger
             return {...state,
                 [action.payload.todolistId]:state[action.payload.todolistId].map(el => el.id === action.payload.taskId ? {...el,isDone:action.payload.isDone}:el)
             }

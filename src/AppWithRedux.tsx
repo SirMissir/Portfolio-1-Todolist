@@ -78,16 +78,16 @@ function AppWithRedux(): JSX.Element {
     },[dispatch])
 
 
-    const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
-        switch (filterValue) {
-            case "active":
-                return  tasksList.filter(t => !t.isDone )
-            case "completed":
-                return tasksList.filter(t => t.isDone )
-            default:
-                return tasksList
-        }
-    };
+    // const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
+    //     switch (filterValue) {
+    //         case "active":
+    //             return  tasksList.filter(t => !t.isDone )
+    //         case "completed":
+    //             return tasksList.filter(t => t.isDone )
+    //         default:
+    //             return tasksList
+    //     }
+    // };
 
     function ButtonAppBar() {
         return (
@@ -114,7 +114,7 @@ function AppWithRedux(): JSX.Element {
     }
 
     const todoListsComponents = todoLists.map(el => {
-        const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
+        // const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
 
         return <Grid item>
             <TodoList

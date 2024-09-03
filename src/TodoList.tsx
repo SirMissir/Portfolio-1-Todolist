@@ -40,6 +40,19 @@ const TodoList =memo( (props:TodoListPropsType) => {
 
     const todoClasses = isAllTasksNotIsDone ? "todolist-empty" : "todolist"
 
+    const getFilterTaskForRender = (tasks:Array<TaskType>, filter: FilterValuesType) => {
+            switch (filter) {
+                case "active":
+                    return  tasks.filter(t => !t.isDone )
+                case "completed":
+                    return tasks.filter(t => t.isDone )
+                default:
+                    return tasks
+            }
+        };
+
+    const tasksForRender: Array<TaskType> = getFilterTaskForRender(props.tasks.[id], props.filter)
+
     const todoListItems: Array<JSX.Element> = props.tasks.map((task) => {
         const removeTaskHandler = () => props.removeTask(task.id, props.todoListId)
         const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>

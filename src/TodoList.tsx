@@ -29,7 +29,7 @@ export type TaskType = {
 }
 
 const TodoList =memo( (props:TodoListPropsType) => {
-    console.log('Todolist')
+    // console.log('Todolist')
     let isAllTasksNotIsDone = true // все не выполнено, change background-color todolist
     for (let i = 0; i < props.tasks.length; i++) {
         if (props.tasks[i].isDone) {
@@ -51,15 +51,14 @@ const TodoList =memo( (props:TodoListPropsType) => {
             }
         };
 
-    const tasksForRender: Array<TaskType> = getFilterTaskForRender(props.tasks.[id], props.filter)
+    const tasksForRender: Array<TaskType> = getFilterTaskForRender(props.tasks, props.filter)
 
-    const todoListItems: Array<JSX.Element> = props.tasks.map((task) => {
+
+    const todoListItems: Array<JSX.Element> = tasksForRender.map((task) => {
         const removeTaskHandler = () => props.removeTask(task.id, props.todoListId)
         const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>
             props.changeTaskStatus(task.id, e.currentTarget.checked, props.todoListId)
         const changeTaskTitle = ( newTitle:string) => props.changeTaskTitle(task.id, newTitle, props.todoListId)
-
-
         return (
             <li key={task.id}>
                 <Checkbox
@@ -78,6 +77,7 @@ const TodoList =memo( (props:TodoListPropsType) => {
             </li>
         )
     })
+
 
     const addTask = useCallback((title:string) => {
             props.addTask(title, props.todoListId)

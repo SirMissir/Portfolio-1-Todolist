@@ -78,17 +78,6 @@ function AppWithRedux(): JSX.Element {
     },[dispatch])
 
 
-    // const getFilterTaskForRender = (tasksList:Array<TaskType>, filterValue: FilterValuesType) => {
-    //     switch (filterValue) {
-    //         case "active":
-    //             return  tasksList.filter(t => !t.isDone )
-    //         case "completed":
-    //             return tasksList.filter(t => t.isDone )
-    //         default:
-    //             return tasksList
-    //     }
-    // };
-
     function ButtonAppBar() {
         return (
             <Box sx={{ flexGrow: 1 }}>
@@ -114,7 +103,6 @@ function AppWithRedux(): JSX.Element {
     }
 
     const todoListsComponents = todoLists.map(el => {
-        // const tasksForRender: Array<TaskType> = getFilterTaskForRender(tasks[el.id], el.filter)
 
         return <Grid item>
             <TodoList
@@ -122,7 +110,7 @@ function AppWithRedux(): JSX.Element {
 
                 todoListId={el.id}
                 title={el.title}
-                tasks={tasksForRender}
+                tasks={tasks[el.id]}
                 filter={el.filter}
 
                 addTask={addTask}

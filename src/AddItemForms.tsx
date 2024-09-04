@@ -4,12 +4,10 @@ import TextField from '@mui/material/TextField';
 
 type AddItemFormPropsType = {
     addItem: (title:string)=>void
-    // recommendedTitleLength: number
-    // maxTitleLength:number
 }
 
 const AddItemForms = memo( (props:AddItemFormPropsType) => {
-        // console.log('AddItemForm')
+        console.log('AddItemForm')
     const [title,setTitle]= useState<string>("")
     const [error,setError]= useState<boolean>(false)
 
@@ -17,7 +15,6 @@ const AddItemForms = memo( (props:AddItemFormPropsType) => {
     let maxTitleLength=8;
 
     const addTaskHandler = () => {
-
         const trimmedTitle = title.trim()
         if(trimmedTitle ){
             props.addItem(trimmedTitle)
@@ -28,7 +25,6 @@ const AddItemForms = memo( (props:AddItemFormPropsType) => {
     }
 
     const setLocalTitleHandler = (e:ChangeEvent<HTMLInputElement>) =>{
-
         error && setError(false)
         setTitle(e.currentTarget.value)
     }
@@ -64,7 +60,6 @@ const AddItemForms = memo( (props:AddItemFormPropsType) => {
                 value={title}
                 onChange={setLocalTitleHandler}
                 onKeyDown = {onKeyDownAddTaskHandler}
-
                 className={error ? "input-error" : ""}
             />
             <Button

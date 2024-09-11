@@ -26,12 +26,6 @@ const EditableSpan: FC<EditableSpanPropsType> = (
 
     return(
         isEditMode ?
-            // <input
-            // value={value}
-            // autoFocus
-            // onChange={setValueHandler}
-            // onBlur={toggleEditMode}
-            // />
             <TextField
                 id="outlined-multiline-static"
                 label="Multiline"

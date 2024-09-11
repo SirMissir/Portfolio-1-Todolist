@@ -50,9 +50,17 @@ const TodoList =memo( (props:TodoListPropsType) => {
                     return tasks
             }
         };
-
     const tasksForRender: Array<TaskType> = getFilterTaskForRender(props.tasks, props.filter)
 
+    const onAllClickHandler=useCallback(() => {
+        props.changeTodolistFilter("all", props.todoListId)
+    },[props.changeTodolistFilter,props.todoListId])
+    const onActiveClickHandler=useCallback(() => {
+        props.changeTodolistFilter("active", props.todoListId)
+    },[props.changeTodolistFilter,props.todoListId])
+    const onCompletedClickHandler=useCallback(() => {
+        props.changeTodolistFilter("completed", props.todoListId)
+    },[props.changeTodolistFilter,props.todoListId])
 
     const todoListItems: Array<JSX.Element> = tasksForRender.map((task) => {
         const removeTaskHandler = () => props.removeTask(task.id, props.todoListId)
@@ -100,23 +108,17 @@ const TodoList =memo( (props:TodoListPropsType) => {
                 </ul>
                 <div>
                     <Button variant={props.filter === "all" ? "contained" : "outlined"} color="success"
-                            onClick={() => {
-                                props.changeTodolistFilter("all", props.todoListId)
-                            }}
+                            onClick={onAllClickHandler}
                     >
                         All
                     </Button>
                     <Button variant={props.filter === "active" ? "contained" : "outlined"} color="success"
-                            onClick={() => {
-                                props.changeTodolistFilter("active", props.todoListId)
-                            }}
+                            onClick={onActiveClickHandler}
                     >
                         Active
                     </Button>
                     <Button variant={props.filter === "completed" ? "contained" : "outlined"} color="success"
-                            onClick={() => {
-                                props.changeTodolistFilter("completed", props.todoListId)
-                            }}
+                            onClick={onCompletedClickHandler}
                     >
                         Completed
                     </Button>

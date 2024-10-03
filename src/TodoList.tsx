@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
+import {ButtonMemo} from "./ButtonMemo";
 
 
 type TodoListPropsType = {
@@ -107,21 +108,9 @@ const TodoList =memo( (props:TodoListPropsType) => {
                     {todoListItems}
                 </ul>
                 <div>
-                    <Button variant={props.filter === "all" ? "contained" : "outlined"} color="success"
-                            onClick={onAllClickHandler}
-                    >
-                        All
-                    </Button>
-                    <Button variant={props.filter === "active" ? "contained" : "outlined"} color="success"
-                            onClick={onActiveClickHandler}
-                    >
-                        Active
-                    </Button>
-                    <Button variant={props.filter === "completed" ? "contained" : "outlined"} color="success"
-                            onClick={onCompletedClickHandler}
-                    >
-                        Completed
-                    </Button>
+                    <ButtonMemo variant={props.filter === 'all'} color="success" onClick={onAllClickHandler} name={'ALL'}/>
+                    <ButtonMemo variant={props.filter === 'active'} color="success" onClick={onActiveClickHandler} name={'Active'}/>
+                    <ButtonMemo variant={props.filter === 'completed'} color="success" onClick={onCompletedClickHandler} name={'Completed'}/>
                 </div>
             </div>
         </div>

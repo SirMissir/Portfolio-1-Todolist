@@ -2,11 +2,19 @@ import Button from "@mui/material/Button";
 import React, {memo} from "react";
 
 
-export const ButtonMemo = memo( (props:PropsType)=>{
+
+type ButtonMemoType = {
+    variant:boolean,
+    onClick:()=>void,
+    color: 'success',
+    name: string
+}
+
+export const ButtonMemo = memo( (props:ButtonMemoType )=>{
     console.log('RerenderButtonFilter')
     return(
         <Button
-            variant={props.filter === "all" ? "contained" : "outlined"}
+            variant={props.variant  ? "contained" : "outlined"}
             onClick={props.onClick}
             color="success"
         >
@@ -14,6 +22,4 @@ export const ButtonMemo = memo( (props:PropsType)=>{
         </Button>
     )
     }
-
-
 )

@@ -31,7 +31,7 @@ export type TaskType = {
 }
 
 const TodoList =memo( (props:TodoListPropsType) => {
-    // console.log('Todolist')
+    console.log('Todolist')
     let isAllTasksNotIsDone = true // все не выполнено, change background-color todolist
     for (let i = 0; i < props.tasks.length; i++) {
         if (props.tasks[i].isDone) {
@@ -64,11 +64,15 @@ const TodoList =memo( (props:TodoListPropsType) => {
         props.changeTodolistFilter("completed", props.todoListId)
     },[props.changeTodolistFilter,props.todoListId])
 
-    const removeTaskHandler = useCallback((taskId:string) => props.removeTask(taskId, props.todoListId),[props.removeTask,props.todoListId])
-    const changeTaskStatusHandler =useCallback((taskId:string, newIsDone: boolean) =>
-        props.changeTaskStatus(taskId, newIsDone, props.todoListId),[props.changeTaskStatus,props.todoListId])
-    const changeTaskTitleHandler = useCallback(( taskId:string,newTitle:string) => props.changeTaskTitle(taskId, newTitle, props.todoListId),[props.changeTaskTitle,props.todoListId])
-
+    const removeTaskHandler = useCallback((taskId:string) =>{
+        props.removeTask(taskId, props.todoListId)
+        }, [props.removeTask,props.todoListId])
+    const changeTaskTitleHandler = useCallback(( taskId:string,newTitle:string) => {
+        props.changeTaskTitle(taskId, newTitle, props.todoListId)
+    },[props.changeTaskTitle,props.todoListId])
+    const changeTaskStatusHandler =useCallback((taskId:string, newIsDone: boolean) => {
+        props.changeTaskStatus(taskId, newIsDone, props.todoListId)
+    },[props.changeTaskStatus,props.todoListId])
 
     const todoListItems: Array<JSX.Element> = tasksForRender.map((task) => {
 

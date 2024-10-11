@@ -10,7 +10,7 @@ const meta: Meta<typeof EditableSpan> = {
     component: EditableSpan,
     tags: ['autodocs'],
     parameters: {
-        layout: 'fullscreen',
+        layout: 'centered',
     },
     args:{
         title: 'Title',

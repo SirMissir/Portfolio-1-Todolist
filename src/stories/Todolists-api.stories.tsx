@@ -4,9 +4,14 @@ import axios from 'axios';
 export const GetTodolists = () => {
     const { state, setState } = useState<any>(null);
 
-    useEffect(() => {
+    useEffect( () => {
+        let promise =axios.get('http://social-network.samuraijs.com/api/1.1/todo-lists')
 
-    }, []);
+        promise.then((res)=>{
+
+        })
+
+    } );
 
     return <div>{JSON.stringify(state)}</div>;
 };
@@ -17,7 +22,7 @@ export const CreateTodolists = () => {
 
     useEffect(() => {
 
-    }, []);
+    });
 
     return <div>{JSON.stringify(state)}</div>;
 };
@@ -28,7 +33,7 @@ export const UpdateTodolists = () => {
     };
     useEffect(() => {
 
-    }, []);
+    }, );
 
     return <div>{JSON.stringify(state)}</div>;
 };
@@ -39,7 +44,7 @@ export const DeleteTodolists = () => {
 
     useEffect(() => {
 
-    }, []);
+    }, );
 
     return <div>{JSON.stringify(state)}</div>;
 };

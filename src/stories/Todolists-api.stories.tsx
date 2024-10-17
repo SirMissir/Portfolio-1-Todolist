@@ -39,8 +39,13 @@ export const CreateTodolists = () => {
 export const UpdateTodolists = () => {
     const { state, setState } = useState<any>(null);
     useEffect(() => {
+        const todolistId = "v1()"
+        let promise =axios.delet('http://social-network.samuraijs.com/api/1.1/todo-lists',{title: "StoryBookTodoList"},settings)
 
-    }, []);
+        promise.then((res)=>{
+            setState(res.data)
+        })
+    },[]);
 
     return <div>{JSON.stringify(state)}</div>;
 }

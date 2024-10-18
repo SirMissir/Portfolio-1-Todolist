@@ -51,8 +51,21 @@ export const UpdateTodolists = () => {
 }
 export const DeleteTodolists = () => {
     const { state, setState } = useState<any>(null);
-    useEffect(() => {
 
-    },[] );
+    useEffect(() => {
+        const todolistId = "v1()"; // Замените на актуальный ID списка задач
+
+        const deleteTodoList = async () => {
+            try {
+                await axios.delete(`http://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`);
+                setState({ message: 'Список задач успешно удален' });
+            } catch (error) {
+                console.error('Ошибка при удалении списка задач:', error);
+            }
+        };
+
+        deleteTodoList();
+    }, []);
+
     return <div>{JSON.stringify(state)}</div>;
 };

@@ -8,16 +8,38 @@ export default {
 const settings= {
     withCredentials: true
 }
+export type Todolist = {
+    id: string
+    title: string
+    addedDate: string
+    order: number
+}
 
+export const AppHttpRequests = () => {
+    const [todolists, setTodolists] = useState<any>([])
 
-export const GetTodolists = () => {
+    useEffect(() => {
+        axios
+            .get('https://social-network.samuraijs.com/api/1.1/todo-lists', {
+                headers: {
+                    Authorization: 'Token',
+                },
+            })
+            .then(res => {
+                console.log(res.data)
+            })
+    }, [])
+
+    /*...*/
+}
+
+export const GetTodolists1 = () => {
     const { state, setState } = useState<any>(null);
 
     useEffect( () => {
-        let promise =axios.get("social-network.samuraijs.com/api/1.1/todo-lists",settings)
-
-        promise.then((res)=>{
-                setState(res.data)
+        let promise =axios.get("https://social-network.samuraijs.com/api/1.1/todo-lists",settings)
+            .then((response)=>{
+                setState(response.data)
         })
 
     },[] );
@@ -25,17 +47,39 @@ export const GetTodolists = () => {
     return <div>{JSON.stringify(state)}</div>;
 };
 
-// export const CreateTodolists = () => {
-//     const { state, setState } = useState<any>(null);
-//     useEffect(() => {
-//         let promise =axios.get('http://social-network.samuraijs.com/api/1.1/todo-lists',{title: "StoryBookTodoList"},settings)
-//
-//         promise.then((res)=>{
-//             setState(res.data)
-//         })
-//     },[]);
-//     return <div>{JSON.stringify(state)}</div>;
-// };
+export const GetTodolists = () => {
+    const [state, setState] = useState<any>(null); // Правильная деструктуризация
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('http://social-network.samuraijs.com/api/1.1/todo-lists', settings);
+                setState(res.data);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    return <div>{JSON.stringify(state)}</div>;
+};
+
+export const CreateTodolists = () => {
+    const { state, setState } = useState<any>(null);
+    useEffect(() => {
+        let promise =axios.post("http://social-network.samuraijs.com/api/1.1/todo-lists",{title: "StoryBookTodoList"},settings)
+            .then((res)=>{
+            setState(res.data)
+        })
+    },[]);
+
+
+    return <div>{JSON.stringify(state)}</div>;
+};
+
+
 // export const UpdateTodolists = () => {
 //     const { state, setState } = useState<any>(null);
 //     useEffect(() => {

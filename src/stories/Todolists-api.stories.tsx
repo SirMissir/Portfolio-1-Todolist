@@ -26,57 +26,32 @@ export const AppHttpRequests = () => {
                 },
             })
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
+                setTodolists(res.data)
             })
     }, [])
-
-    /*...*/
+    return <div>{JSON.stringify(todolists)}</div>;
 }
 
-export const GetTodolists1 = () => {
-    const { state, setState } = useState<any>(null);
-
-    useEffect( () => {
-        let promise =axios.get("https://social-network.samuraijs.com/api/1.1/todo-lists",settings)
-            .then((response)=>{
-                setState(response.data)
-        })
-
-    },[] );
-
-    return <div>{JSON.stringify(state)}</div>;
-};
-
-export const GetTodolists = () => {
-    const [state, setState] = useState<any>(null); // Правильная деструктуризация
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get('http://social-network.samuraijs.com/api/1.1/todo-lists', settings);
-                setState(res.data);
-            } catch (error) {
-                console.error('Ошибка при получении данных:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    return <div>{JSON.stringify(state)}</div>;
-};
-
 export const CreateTodolists = () => {
-    const { state, setState } = useState<any>(null);
+    const [todolists, setTodolists] = useState<any>(null);
+
     useEffect(() => {
-        let promise =axios.post("http://social-network.samuraijs.com/api/1.1/todo-lists",{title: "StoryBookTodoList"},settings)
-            .then((res)=>{
-            setState(res.data)
-        })
-    },[]);
-
-
-    return <div>{JSON.stringify(state)}</div>;
+        axios
+            .post(
+                'https://social-network.samuraijs.com/api/1.1/todo-lists',
+                { title: "StoryBookTodoList" },
+                {headers: {
+                    Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
+                },
+            }
+        )
+            .then(res => {
+                // console.log(res.data)
+                setTodolists(res.data)
+            })
+    }, [])
+    return <div>{JSON.stringify(todolists)}</div>;
 };
 
 

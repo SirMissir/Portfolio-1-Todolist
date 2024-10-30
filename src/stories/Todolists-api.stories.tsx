@@ -6,7 +6,10 @@ export default {
 }
 
 const settings= {
-    withCredentials: true
+    withCredentials: true,
+    headers: {
+        "API-KEY": "ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2"
+    }
 }
 export type Todolist = {
     id: string
@@ -20,11 +23,9 @@ export const AppHttpRequests = () => {
 
     useEffect(() => {
         axios
-            .get('https://social-network.samuraijs.com/api/1.1/todo-lists', {
-                headers: {
-                    Authorization: 'Token',
-                },
-            })
+            .get('https://social-network.samuraijs.com/api/1.1/todo-lists',
+                settings
+            )
             .then(res => {
                 // console.log(res.data)
                 setTodolists(res.data)
@@ -41,10 +42,7 @@ export const CreateTodolists = () => {
             .post(
                 'https://social-network.samuraijs.com/api/1.1/todo-lists',
                 { title: "StoryBookTodoList" },
-                {headers: {
-                    Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                },
-            }
+                settings
         )
             .then(res => {
                 // console.log(res.data)
@@ -55,7 +53,7 @@ export const CreateTodolists = () => {
 };
 
 
-// export const UpdateTodolists = () => {
+// export const  DeleteTodolists = () => {
 //     const { state, setState } = useState<any>(null);
 //     useEffect(() => {
 //         const todolistId = "v1()"
@@ -68,13 +66,14 @@ export const CreateTodolists = () => {
 //
 //     return <div>{JSON.stringify(state)}</div>;
 // }
-// export const DeleteTodolists = () => {
+
+// export const UpdateTodolists = () => {
 //     const { state, setState } = useState<any>(null);
 //
 //     useEffect(() => {
 //         const todolistId = "v1()"; // Замените на актуальный ID списка задач
 //
-//         const deleteTodoList = async () => {
+//         const UpdateTodolists = async () => {
 //             try {
 //                 await axios.delete(`http://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`);
 //                 setState({ message: 'Список задач успешно удален' });

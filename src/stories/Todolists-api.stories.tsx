@@ -45,6 +45,7 @@ export const CreateTodolists = () => {
                 settings
         )
             .then(res => {
+                debugger
                 // console.log(res.data)
                 setTodolists(res.data)
             })
@@ -53,37 +54,38 @@ export const CreateTodolists = () => {
 };
 
 
-// export const  DeleteTodolists = () => {
-//     const { state, setState } = useState<any>(null);
-//     useEffect(() => {
-//         const todolistId = "v1()"
-//         let promise =axios.delet('http://social-network.samuraijs.com/api/1.1/todo-lists',{title: "StoryBookTodoList"},settings)
-//
-//         promise.then((res)=>{
-//             setState(res.data)
-//         })
-//     },[]);
-//
-//     return <div>{JSON.stringify(state)}</div>;
-// }
+export const  DeleteTodolists = () => {
+    const { todolists, setTodolists} = useState<any>(null);
+    useEffect(() => {
+        axios
+            .delete(
+                'https://social-network.samuraijs.com/api/1.1/todo-lists/e535c372-597b-4907-8faa-f30d8e2b9535',
+                settings
+            )
+            .then(res => {
+                debugger
+                // console.log(res.data)
+                setTodolists(res.data)
+            })
+    }, [])
 
-// export const UpdateTodolists = () => {
-//     const { state, setState } = useState<any>(null);
-//
-//     useEffect(() => {
-//         const todolistId = "v1()"; // Замените на актуальный ID списка задач
-//
-//         const UpdateTodolists = async () => {
-//             try {
-//                 await axios.delete(`http://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`);
-//                 setState({ message: 'Список задач успешно удален' });
-//             } catch (error) {
-//                 console.error('Ошибка при удалении списка задач:', error);
-//             }
-//         };
-//
-//         deleteTodoList();
-//     }, []);
-//
-//     return <div>{JSON.stringify(state)}</div>;
-// };
+    return <div>{JSON.stringify(todolists)}</div>;
+}
+
+export const UpdateTodolists = () => {
+    const { todolists, setTodolists } = useState<any>(null);
+
+        useEffect (() => {
+            axios
+                .put(
+                    'https://social-network.samuraijs.com/api/1.1/todo-lists/5d350a0c-8aa3-4164-93a2-faf873784527',
+                    { title: "UpdateName" },
+                    settings
+                )
+                .then(res => {
+                    // console.log(res.data)
+                    setTodolists(res.data)
+                })
+        }, [])
+        return <div>{JSON.stringify(todolists)}</div>;
+}

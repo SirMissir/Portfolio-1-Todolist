@@ -18,7 +18,6 @@ export type Todolist = {
     addedDate: string
     order: number
 }
-
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<any>([])
 
@@ -70,4 +69,17 @@ export const UpdateTodolists = () => {
                 })
         }, [])
         return <div>{JSON.stringify(todolists)}</div>;
+}
+export const GetTasks = () => {
+    const { tasks, setTasks } = useState<any>(null);
+        useEffect (() => {
+            const todolistId = '';
+            todolistsApi
+                .getTasks(todolistId)
+                .then(res => {
+                    // console.log(res.data)
+                    setTasks(res.data)
+                })
+        }, [])
+        return <div>{JSON.stringify(tasks)}</div>;
 }

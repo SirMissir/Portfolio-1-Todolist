@@ -1,5 +1,5 @@
 import axios from "axios";
-import {number, string} from "prop-types";
+
 
 const settings = {
     withCredentials: true,
@@ -9,7 +9,7 @@ const settings = {
 }
 
 const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.1/todo-lists',
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     ...settings
 })
 
@@ -19,12 +19,12 @@ type getTodolistsType = {
     addedDate: string,
     order: number
 }
-type ResponseType<D> = {
+type ResponseType<D={}> = {
     resultCode: number,
     messages: Array<string>,
     data: D
 }
-type GetTasksResponse = {
+export type GetTasksResponse = {
     error: string | null
     totalCount: number
     items: DomainTask[]
@@ -60,20 +60,22 @@ export const todolistsApi = {
 
         const promise =
             instance
-                .delete<ResponseType<{}>>(
+                .delete<ResponseType>(
                     `todo-lists/${id}`)
         return promise;
     },
     updateTodolists(id: string, title: string) {
 
         const promise = instance
-            .put<ResponseType<{}>>(
+            .put<ResponseType>(
                 `todo-lists/${id}`,
                 {title: title})
         return promise;
     },
     getTasks(todolistId: string) {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
+    },
+    deleteTask(todolistId:string, taskId: string){
+        return instance.delete<ResponseType>('todo-lists/${todolistId}/tasks/${taskId}')
     }
-
 }

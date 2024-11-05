@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {GetTasksResponse, todolistsApi} from "../api/todolists-api";
+import {DomainTask, GetTasksResponse, todolistsApi} from "../api/todolists-api";
 
 export default {
         title: 'API/GetTodolists'
@@ -81,16 +81,71 @@ export const GetTasks = () => {
                     setTasks(res.data)
                 })
         }, [])
-        return <div>{JSON.stringify(tasks)}</div>;
+        // return <div>{JSON.stringify(tasks)}</div>;
+    return (
+        <div>
+            <h2>Tasks</h2>
+            {tasks ? (
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {tasks.items.map((task: DomainTask) => (
+                        <tr key={task.id}>
+                            <td>{task.id}</td>
+                            <td>{task.title}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            ) : (
+                <div>Loading...</div>
+            )}
+        </div>
+    );
+
 }
 export const DeleteTask = () => {
     const  [task, setTask] = useState<any>(null);
     useEffect(() => {
-        const todolistId = 'a41cf05a-dd8e-474c-9387-99b7986b4942'
-        const taskId = '';
+        const todolistId = '111b8a35-15f9-425e-9e55-af6f84f515a5'
+        const taskId = '090cc7ec-01b8-43a3-b8b4-7ace035edf9a';
         todolistsApi.deleteTask(todolistId,taskId)
             .then(res => {
-                debugger
+                // console.log(res.data)
+                setTask(res.data)
+            })
+    }, [])
+
+    return <div>{JSON.stringify(task)}</div>;
+}
+export const CreateTask = () => {
+    const  [task, setTask] = useState<any>(null);
+    useEffect(() => {
+        const todolistId = '111b8a35-15f9-425e-9e55-af6f84f515a5'
+        const title = "NewTask"
+        todolistsApi.createTask(todolistId,title)
+            .then(res => {
+                // console.log(res.data)
+                setTask(res.data)
+            })
+    }, [])
+
+    return <div>{JSON.stringify(task)}</div>;
+}
+export const UpdateTask = () => {
+    const  [task, setTask] = useState<any>(null);
+    useEffect(() => {
+        const todolistId = '111b8a35-15f9-425e-9e55-af6f84f515a5'
+        const taskId = '090cc7ec-01b8-43a3-b8b4-7ace035edf9a'
+        const title = "UpdateNewTask"
+        todolistsApi.updateTask(todolistId,taskId,title)
+            .then(res => {
                 // console.log(res.data)
                 setTask(res.data)
             })

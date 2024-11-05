@@ -29,7 +29,7 @@ export type GetTasksResponse = {
     totalCount: number
     items: DomainTask[]
 }
-type DomainTask = {
+export type DomainTask = {
     description: string
     title: string
     status: number
@@ -52,12 +52,11 @@ export const todolistsApi = {
     createTodolists(title: string) {
         const promise = instance
             .post<ResponseType<{ item: getTodolistsType }>>(
-                '',
+                'todo-lists',
                 {title: title})
         return promise;
     },
     deleteTodolists(id: string) {
-
         const promise =
             instance
                 .delete<ResponseType>(
@@ -75,7 +74,14 @@ export const todolistsApi = {
     getTasks(todolistId: string) {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
-    deleteTask(todolistId:string, taskId: string){
-        return instance.delete<ResponseType>('todo-lists/${todolistId}/tasks/${taskId}')
-    }
+    deleteTask(todolistId:string, taskId: string) {
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    },
+    createTask(todolistId:string,title:string){
+        return instance.post<ResponseType>(`todo-lists/${todolistId}/tasks`,{title})
+    },
+    updateTask(todolistId: string, taskId: string, title: string) {
+        return instance.put<ResponseType<{ item: { title: string } }>>(
+            `todo-lists/${todolistId}/tasks/${taskId}`, { title }
+        )}
 }

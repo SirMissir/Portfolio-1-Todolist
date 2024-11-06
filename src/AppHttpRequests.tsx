@@ -16,19 +16,19 @@ export type Todolist = {
 
 
 export const AppHttpRequests = () => {
-    const [todolists, setTodolists] = useState<any>([])
+    const [todolists, setTodolists] = useState<Todolist[]>([])
     const [tasks, setTasks] = useState<any>({})
 
 
     useEffect(() => {
         axios
-            .get('https://social-network.samuraijs.com/api/1.1/todo-lists', {
+            .get<Todolist[]>('https://social-network.samuraijs.com/api/1.1/todo-lists', {
                 headers: {
-                    Authorization: 'Bearer ',
+                    Authorization: 'Bearer  ',
                 },
             })
             .then(res => {
-                console.log(res.data)
+                setTodolists(res.data)
             })
     }, [])
 

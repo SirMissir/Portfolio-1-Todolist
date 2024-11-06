@@ -4,13 +4,24 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 // import { EditableSpan } from '../common/components/EditableSpan/EditableSpan'
 import AddItemForms from "./AddItemForms";
 import EditableSpan from "./EditableSpan";
+import axios from "axios";
+
 
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<any>([])
     const [tasks, setTasks] = useState<any>({})
 
+
     useEffect(() => {
-        // get todolists
+        axios
+            .get('https://social-network.samuraijs.com/api/1.1/todo-lists', {
+                headers: {
+                    Authorization: 'Bearer ',
+                },
+            })
+            .then(res => {
+                console.log(res.data)
+            })
     }, [])
 
     const createTodolistHandler = (title: string) => {

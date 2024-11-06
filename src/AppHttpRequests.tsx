@@ -7,6 +7,14 @@ import EditableSpan from "./EditableSpan";
 import axios from "axios";
 
 
+export type Todolist = {
+    id: string
+    title: string
+    addedDate: string
+    order: number
+}
+
+
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<any>([])
     const [tasks, setTasks] = useState<any>({})

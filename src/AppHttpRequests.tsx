@@ -31,7 +31,30 @@ type DeleteTodolistResponse ={
     messages: Array<string>,
     data: {}
 }
+type UpdateTodolistResponse = {
+    resultCode: number,
+    messages: Array<string>,
+    data: {}
+}
 
+export type GetTasksResponse = {
+    error: string | null
+    totalCount: number
+    items: DomainTask[]
+}
+
+export type DomainTask = {
+    description: string
+    title: string
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
 
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<Todolist[]>([])
@@ -46,7 +69,20 @@ export const AppHttpRequests = () => {
                 },
             })
             .then(res => {
-                setTodolists(res.data)
+                const todolists = res.data
+                setTodolists(todolists)
+                todolists.forEach(tl => {
+                    axios
+                        .get<GetTasksResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${tl.id}/tasks`, {
+                            headers: {
+                                Authorization: 'Bearer ',
+                                'API-KEY': '',
+                            },
+                        })
+                        .then(res => {
+                            setTasks({ ...tasks, [tl.id]: res.data.items })
+                        })
+                })
             })
     }, [])
 
@@ -83,7 +119,21 @@ export const AppHttpRequests = () => {
     }
 
     const updateTodolistHandler = (id: string, title: string) => {
-        // update todolist title
+        axios
+            .put<UpdateTodolistResponse>(
+                `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`,
+                { title },
+                {
+                    headers: {
+                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
+                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
+                    },
+                }
+            )
+            .then(res => {
+                debugger
+                setTodolists(data=>data.map(t=>t.id===id?{...t,title:title}:t))
+            })
     }
 
     const createTaskHandler = (title: string, todolistId: string) => {

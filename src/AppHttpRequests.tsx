@@ -7,18 +7,17 @@ import EditableSpan from "./EditableSpan";
 import axios from "axios";
 
 
+
 export type Todolist = {
     id: string
     title: string
     addedDate: string
     order: number
 }
-
 type FieldError = {
     error: string
     field: string
 }
-
 type CreateTodolistResponse ={
     data: {
         item: Todolist
@@ -26,6 +25,11 @@ type CreateTodolistResponse ={
     fieldsErrors:[FieldError],
     messages:string,
     resultCode:number
+}
+type DeleteTodolistResponse ={
+    resultCode: number
+    messages: Array<string>,
+    data: {}
 }
 
 
@@ -53,8 +57,8 @@ export const AppHttpRequests = () => {
                 { title },
                 {
                     headers: {
-                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf ',
-                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2'
+                        Authorization: '',
+                        'API-KEY': ''
                     },
                 }
             )
@@ -65,7 +69,17 @@ export const AppHttpRequests = () => {
     }
 
     const removeTodolistHandler = (id: string) => {
-        // remove todolist
+        axios
+            .delete<DeleteTodolistResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {
+                headers: {
+                    Authorization: ' ',
+                    'API-KEY': ''
+                },
+            })
+            .then(res => {
+                debugger
+                setTodolists(data=>data.filter(t=>t.id !==id))
+            })
     }
 
     const updateTodolistHandler = (id: string, title: string) => {

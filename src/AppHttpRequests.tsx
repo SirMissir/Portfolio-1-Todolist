@@ -33,7 +33,19 @@ export const AppHttpRequests = () => {
     }, [])
 
     const createTodolistHandler = (title: string) => {
-        // create todolist
+        axios
+            .post(
+                'https://social-network.samuraijs.com/api/1.1/todo-lists',
+                { title },
+                {
+                    headers: {
+                        Authorization: 'Bearer ',
+                    },
+                }
+            )
+            .then(res => {
+                console.log(res.data)
+            })
     }
 
     const removeTodolistHandler = (id: string) => {

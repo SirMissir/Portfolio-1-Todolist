@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Todolist} from "./todolistsApi.types";
+import {Todolist, UpdateTodolistResponse} from "./todolistsApi.types";
 
 
 export const todolistsApi = {
@@ -9,6 +9,20 @@ export const todolistsApi = {
             {
                 headers: {
                     Authorization: 'Bearer ',
+                },
+            }
+        )
+        return promise
+    },
+    updateTodolist(payload: { id: string; title: string }) {
+        const { title, id } = payload
+        const promise = axios.put<UpdateTodolistResponse>(
+            `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`,
+            { title },
+            {
+                headers: {
+                    Authorization: 'Bearer ',
+                    'API-KEY': ',
                 },
             }
         )

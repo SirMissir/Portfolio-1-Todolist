@@ -5,130 +5,114 @@ import React, {ChangeEvent, useEffect, useState} from 'react'
 import AddItemForms from "./AddItemForms";
 import EditableSpan from "./EditableSpan";
 import axios from "axios";
+import {
+    CreateTaskResponse,
+    DeleteTaskResponse, DomainTask,
+    UpdateTaskModel,
+    UpdateTaskResponse
+} from "./feauters/todolists/api/tasksApi.types";
+import {
+    CreateTodolistResponse,
+    DeleteTodolistResponse, Todolist,
+    UpdateTodolistResponse
+} from "./feauters/todolists/api/todolistsApi.types";
 
 
-export type Todolist = {
-    id: string
-    title: string
-    addedDate: string
-    order: number
-}
-type FieldError = {
-    error: string
-    field: string
-}
-type CreateTodolistResponse = {
-    data: {
-        item: Todolist
-    },
-    fieldsErrors: [FieldError],
-    messages: string,
-    resultCode: number
-}
-type DeleteTodolistResponse = {
-    resultCode: number
-    messages: Array<string>,
-    data: {}
-}
-type UpdateTodolistResponse = {
-    resultCode: number,
-    messages: Array<string>,
-    data: {}
-}
-
-export type DomainTask = {
-    description: string
-    title: string
-    status: number
-    priority: number
-    startDate: string
-    deadline: string
-    id: string
-    todoListId: string
-    order: number
-    addedDate: string
-    completed: boolean
-}
-export type GetTasksResponse = {
-    error: string | null
-    totalCount: number
-    items: DomainTask[]
-}
-export type CreateTaskResponse = {
-    resultCode: number
-    messages: string
-    data: {
-        item: {
-            description: string
-            title: string
-            completed: boolean
-            status: number
-            priority: number
-            startDate: string
-            deadline: string
-            id: string
-            todoListId: string
-            order: number
-            addedDate: string
-
-        }
-    }
-
-}
-export type DeleteTaskResponse = {
-    resultCode: number
-    messages: string
-    data: {}
-    fieldsErrors: [FieldError]
-
-}
-export type UpdateTaskResponse = {
-    resultCode: number
-    messages: string,
-    data: {item: DomainTask}
-}
-export type UpdateTaskModel = {
-    title: string
-    description: string
-    completed: boolean
-    status: number
-    priority: number
-    startDate: string
-    deadline: string
-}
+// export type Todolist = {
+//     id: string
+//     title: string
+//     addedDate: string
+//     order: number
+// }
+// type FieldError = {
+//     error: string
+//     field: string
+// }
+// type CreateTodolistResponse = {
+//     data: {
+//         item: Todolist
+//     },
+//     fieldsErrors: [FieldError],
+//     messages: string,
+//     resultCode: number
+// }
+// type DeleteTodolistResponse = {
+//     resultCode: number
+//     messages: Array<string>,
+//     data: {}
+// }
+// type UpdateTodolistResponse = {
+//     resultCode: number,
+//     messages: Array<string>,
+//     data: {}
+// }
+//
+// export type DomainTask = {
+//     description: string
+//     title: string
+//     status: number
+//     priority: number
+//     startDate: string
+//     deadline: string
+//     id: string
+//     todoListId: string
+//     order: number
+//     addedDate: string
+//     completed: boolean
+// }
+// export type GetTasksResponse = {
+//     error: string | null
+//     totalCount: number
+//     items: DomainTask[]
+// }
+// export type CreateTaskResponse = {
+//     resultCode: number
+//     messages: string
+//     data: {
+//         item: {
+//             description: string
+//             title: string
+//             completed: boolean
+//             status: number
+//             priority: number
+//             startDate: string
+//             deadline: string
+//             id: string
+//             todoListId: string
+//             order: number
+//             addedDate: string
+//
+//         }
+//     }
+//
+// }
+// export type DeleteTaskResponse = {
+//     resultCode: number
+//     messages: string
+//     data: {}
+//     fieldsErrors: [FieldError]
+//
+// }
+// export type UpdateTaskResponse = {
+//     resultCode: number
+//     messages: string,
+//     data: {item: DomainTask}
+// }
+// export type UpdateTaskModel = {
+//     title: string
+//     description: string
+//     completed: boolean
+//     status: number
+//     priority: number
+//     startDate: string
+//     deadline: string
+// }
 
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<Todolist[]>([])
     const [tasks, setTasks] = useState<any>({})
 
 
-    // useEffect(() => {
-    //     axios
-    //         .get<Todolist[]>('https://social-network.samuraijs.com/api/1.1/todo-lists', {
-    //             headers: {
-    //                 Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-    //                 'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
-    //             },
-    //         })
-    //         .then(res => {
-    //             console.log(res.data)
-    //             const todolists = res.data
-    //             setTodolists(todolists)
-    //             todolists.forEach(tl => {
-    //                 axios
-    //                     .get<GetTasksResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${tl.id}/tasks`, {
-    //                         headers: {
-    //                             Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-    //                             'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
-    //                         },
-    //                     })
-    //                     .then(res => {
-    //                         console.log(res.data.items)
-    //                         setTasks({...tasks, [tl.id]: res.data.items})
-    //                     })
-    //             })
-    //         })
-    // }, [])
     useEffect(() => {
         axios
             .get<Todolist[]>('https://social-network.samuraijs.com/api/1.1/todo-lists', {
@@ -294,8 +278,8 @@ export const AppHttpRequests = () => {
                 model,
                 {
                     headers: {
-                        Authorization: ,
-                        'API-KEY': ,
+                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
+                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
                     },
                 }
             )

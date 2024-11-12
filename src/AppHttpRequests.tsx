@@ -137,8 +137,8 @@ export const AppHttpRequests = () => {
                 {title},
                 {
                     headers: {
-                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
+                        Authorization: ,
+                        'API-KEY': ,
                     },
                 }
             )
@@ -152,8 +152,8 @@ export const AppHttpRequests = () => {
         axios
             .delete<DeleteTodolistResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {
                 headers: {
-                    Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                    'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
+                    Authorization: ,
+                    'API-KEY': ,
                 },
             })
             .then(res => {
@@ -163,17 +163,12 @@ export const AppHttpRequests = () => {
     }
 
     const updateTodolistHandler = (id: string, title: string) => {
-        axios
-            .put<UpdateTodolistResponse>(
-                `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`,
-                {title},
-                {
-                    headers: {
-                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
-                    },
-                }
-            )
+        const updateTodolistHandler = (id: string, title: string) => {
+            todolistsApi.updateTodolist({ id, title }).then(res => {
+                const newTodolists = todolists.map(item => (item.id === id ? { ...item, title } : item))
+                setTodolists(newTodolists)
+            })
+        }
             .then(res => {
                 debugger
                 setTodolists(data => data.map(t => t.id === id ? {...t, title: title} : t))
@@ -187,8 +182,8 @@ export const AppHttpRequests = () => {
                 {title},
                 {
                     headers: {
-                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
+                        Authorization: ,
+                        'API-KEY': ,
                     },
                 }
             )
@@ -204,8 +199,8 @@ export const AppHttpRequests = () => {
                 `https://social-network.samuraijs.com/api/1.1//todo-lists/${todolistId}/tasks/${taskId}`,
                 {
                     headers: {
-                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
+                        Authorization: ,
+                        'API-KEY': ,
                     }
                 },
             )
@@ -236,8 +231,8 @@ export const AppHttpRequests = () => {
                 model,
                 {
                     headers: {
-                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
+                        Authorization: ,
+                        'API-KEY': ,
                     },
                 }
             )
@@ -266,8 +261,8 @@ export const AppHttpRequests = () => {
                 model,
                 {
                     headers: {
-                        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
-                        'API-KEY': 'ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2',
+                        Authorization: ,
+                        'API-KEY': ,
                     },
                 }
             )

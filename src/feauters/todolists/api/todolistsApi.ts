@@ -14,24 +14,25 @@ export const todolistsApi = {
         )
         return promise
     },
-    createTodolists()={
-    const promise = axios.post<CreateTodolistResponse>(
-        'https://social-network.samuraijs.com/api/1.1/todo-lists',
-        {title},
-        {
-            headers: {
-                Authorization: ,
-                'API-KEY': ,
-            },
-        }
-    )
-}
+
+    createTodolists() {
+        const promise = axios.post<CreateTodolistResponse>(
+            'https://social-network.samuraijs.com/api/1.1/todo-lists',
+            {title},
+            {
+                headers: {
+                    Authorization:,
+                    'API-KEY':,
+                },
+            }
+        )
+    },
 
     updateTodolist(payload: { id: string; title: string }) {
-        const { title, id } = payload
+        const {title, id} = payload
         const promise = axios.put<UpdateTodolistResponse>(
             `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`,
-            { title },
+            {title},
             {
                 headers: {
                     Authorization: 'Bearer ',

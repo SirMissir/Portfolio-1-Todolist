@@ -163,16 +163,10 @@ export const AppHttpRequests = () => {
     }
 
     const updateTodolistHandler = (id: string, title: string) => {
-        const updateTodolistHandler = (id: string, title: string) => {
-            todolistsApi.updateTodolist({ id, title }).then(res => {
-                const newTodolists = todolists.map(item => (item.id === id ? { ...item, title } : item))
-                setTodolists(newTodolists)
-            })
-        }
-            .then(res => {
-                debugger
-                setTodolists(data => data.map(t => t.id === id ? {...t, title: title} : t))
-            })
+        todolistsApi.updateTodolist({ id, title }).then(res => {
+            const newTodolists = todolists.map(item => (item.id === id ? { ...item, title } : item))
+            setTodolists(newTodolists)
+        })
     }
 
     const createTaskHandler = (title: string, todolistId: string) => {

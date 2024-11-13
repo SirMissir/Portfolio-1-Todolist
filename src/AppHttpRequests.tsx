@@ -131,17 +131,7 @@ export const AppHttpRequests = () => {
         });
     }, []);
     const createTodolistHandler = (title: string) => {
-        axios
-            .post<CreateTodolistResponse>(
-                'https://social-network.samuraijs.com/api/1.1/todo-lists',
-                {title},
-                {
-                    headers: {
-                        Authorization: ,
-                        'API-KEY': ,
-                    },
-                }
-            )
+        todolistsApi.createTodolists()
             .then(res => {
                 const newTodolist = res.data.data.item
                 setTodolists([newTodolist, ...todolists])

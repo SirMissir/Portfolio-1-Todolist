@@ -15,7 +15,7 @@ export const todolistsApi = {
         return promise
     },
 
-    createTodolists() {
+    createTodolists(title:string) {
         const promise = axios.post<CreateTodolistResponse>(
             'https://social-network.samuraijs.com/api/1.1/todo-lists',
             {title},
@@ -26,6 +26,7 @@ export const todolistsApi = {
                 },
             }
         )
+        return promise
     },
 
     updateTodolist(payload: { id: string; title: string }) {

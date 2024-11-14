@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CreateTodolistResponse, Todolist, UpdateTodolistResponse} from "./todolistsApi.types";
+import {CreateTodolistResponse, DeleteTodolistResponse, Todolist, UpdateTodolistResponse} from "./todolistsApi.types";
 
 
 export const todolistsApi = {
@@ -41,6 +41,16 @@ export const todolistsApi = {
                 },
             }
         )
+        return promise
+    },
+    removeTodolist(id:string) {
+        axios
+            .delete<DeleteTodolistResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {
+                headers: {
+                    Authorization: ,
+                    'API-KEY': ,
+                },
+            })
         return promise
     },
 }

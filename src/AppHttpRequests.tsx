@@ -139,13 +139,7 @@ export const AppHttpRequests = () => {
     }
 
     const removeTodolistHandler = (id: string) => {
-        axios
-            .delete<DeleteTodolistResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {
-                headers: {
-                    Authorization: ,
-                    'API-KEY': ,
-                },
-            })
+        todolistsApi.removeTodolist(id)
             .then(res => {
                 debugger
                 setTodolists(data => data.filter(t => t.id !== id))

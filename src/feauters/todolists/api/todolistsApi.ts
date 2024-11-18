@@ -4,6 +4,7 @@ import {CreateTodolistResponse, DeleteTodolistResponse, Todolist, UpdateTodolist
 const settings = {
     withCredentials: true,
     headers: {
+        Authorization: 'Bearer ',
         "API-KEY": ""
     }
 }
@@ -31,26 +32,17 @@ export const todolistsApi = {
 
     updateTodolist(payload: { id: string; title: string }) {
         const {title, id} = payload
-        const promise = axios.put<UpdateTodolistResponse>(
-            `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`,
+        const promise = instance
+            .put<UpdateTodolistResponse>(
+            `todo-lists/${id}`,
             {title},
-            {
-                headers: {
-                    Authorization: 'Bearer ',
-                    'API-KEY': ',
-                },
-            }
         )
         return promise
     },
     removeTodolist(id:string) {
-        axios
-            .delete<DeleteTodolistResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {
-                headers: {
-                    Authorization: ,
-                    'API-KEY': ,
-                },
-            })
-        return promise
+        const promise= instance
+            .delete<DeleteTodolistResponse>(
+                `todo-lists/${id}`)
+        return promise;
     },
 }

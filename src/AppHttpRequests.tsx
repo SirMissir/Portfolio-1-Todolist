@@ -131,7 +131,7 @@ export const AppHttpRequests = () => {
         });
     }, []);
     const createTodolistHandler = (title: string) => {
-        todolistsApi.createTodolists()
+        todolistsApi.createTodolists(title)
             .then(res => {
                 const newTodolist = res.data.data.item
                 setTodolists([newTodolist, ...todolists])
@@ -141,7 +141,6 @@ export const AppHttpRequests = () => {
     const removeTodolistHandler = (id: string) => {
         todolistsApi.removeTodolist(id)
             .then(res => {
-                debugger
                 setTodolists(data => data.filter(t => t.id !== id))
             })
     }

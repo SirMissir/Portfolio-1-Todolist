@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export type FieldError = {
     error: string
     field: string
@@ -61,4 +63,34 @@ export type UpdateTaskModel = {
     priority: number
     startDate: string
     deadline: string
+}
+
+
+const settings = {
+    withCredentials: true,
+    headers: {
+        Authorization: 'Bearer 86f66b1c-6ffa-4b1b-ab89-5c9793a5c5bf',
+        "API-KEY": "ac6ad0ec-ebe5-4c23-bcb3-ac6aff8b99b2"
+    }
+}
+
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+    ...settings
+})
+
+export const tasksAPI = {
+    getTasks(todolistId: string) {
+        return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
+    },
+    deleteTask(todolistId:string, taskId: string) {
+        return instance.delete<DeleteTaskResponse>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    },
+    createTask(todolistId:string,title:string){
+        return instance.post<CreateTaskResponse>(`todo-lists/${todolistId}/tasks`,{title})
+    },
+    updateTask(todolistId: string, taskId: string, title: string) {
+        return instance.put<UpdateTaskResponse>(
+            `todo-lists/${todolistId}/tasks/${taskId}`, { title }
+        )}
 }

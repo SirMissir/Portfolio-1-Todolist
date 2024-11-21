@@ -7,7 +7,7 @@ import EditableSpan from "./EditableSpan";
 import axios from "axios";
 import {
     CreateTaskResponse,
-    DeleteTaskResponse, DomainTask,
+    DeleteTaskResponse, DomainTask, tasksAPI,
     UpdateTaskModel,
     UpdateTaskResponse
 } from "./feauters/todolists/api/tasksApi.types";
@@ -122,7 +122,7 @@ export const AppHttpRequests = () => {
 
             Promise.all(
                 todolists.map(tl =>
-                    todolistsApi.getTodolists().then(res => ({[tl.id]: res.data.items}))
+                    tasksAPI.getTasks(tl.id).then(res => ({[tl.id]: res.data.items}))
                 )
             ).then(results => {
                 const tasks = results.reduce((acc, current) => ({...acc, ...current}), {});
@@ -153,17 +153,7 @@ export const AppHttpRequests = () => {
     }
 
     const createTaskHandler = (title: string, todolistId: string) => {
-        axios
-            .post<CreateTaskResponse>(
-                `https://social-network.samuraijs.com/api/1.1//todo-lists/${todolistId}/tasks`,
-                {title},
-                {
-                    headers: {
-                        Authorization: ,
-                        'API-KEY': ,
-                    },
-                }
-            )
+        tasksAPI.createTask(todolistId,title)
             .then(res => {
                 const newTask = res.data.data.item
                 setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
@@ -171,16 +161,7 @@ export const AppHttpRequests = () => {
     }
 
     const removeTaskHandler = (taskId: string, todolistId: string) => {
-        axios
-            .delete<DeleteTaskResponse>(
-                `https://social-network.samuraijs.com/api/1.1//todo-lists/${todolistId}/tasks/${taskId}`,
-                {
-                    headers: {
-                        Authorization: ,
-                        'API-KEY': ,
-                    }
-                },
-            )
+        tasksAPI.deleteTask(todolistId,taskId)
             .then(res => {
                 console.log(res.data)
                 setTasks((data: Record<string, DomainTask[]>) => ({

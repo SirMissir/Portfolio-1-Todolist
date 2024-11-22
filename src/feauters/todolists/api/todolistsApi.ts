@@ -17,32 +17,24 @@ const instance = axios.create({
 
 export const todolistsApi = {
     getTodolists() {
-        const promise = instance
-            .get<Todolist[]>('todo-lists')
-        return promise
-    },
+        return instance.get<Todolist[]>('todo-lists')
 
-    createTodolists(title:string) {
-        const promise =  instance
-            .post<CreateTodolistResponse>(
-                'todo-lists',
-                {title: title})
-        return promise
+    },
+    createTodolists(title: string) {
+        return instance.post<CreateTodolistResponse>('todo-lists', {title: title})
     },
 
     updateTodolist(payload: { id: string; title: string }) {
         const {title, id} = payload
-        const promise = instance
+        return instance
             .put<UpdateTodolistResponse>(
-            `todo-lists/${id}`,
-            {title},
-        )
-        return promise
+                `todo-lists/${id}`,
+                {title},
+            )
     },
-    removeTodolist(id:string) {
-        const promise= instance
+    removeTodolist(id: string) {
+        return instance
             .delete<DeleteTodolistResponse>(
                 `todo-lists/${id}`)
-        return promise;
     },
 }

@@ -183,17 +183,7 @@ export const AppHttpRequests = () => {
             completed: task.completed
         }
 
-        axios
-            .put<UpdateTaskResponse>(
-                `https://social-network.samuraijs.com/api/1.1/todo-lists/${task.todoListId}/tasks/${task.id}`,
-                model,
-                {
-                    headers: {
-                        Authorization: ,
-                        'API-KEY': ,
-                    },
-                }
-            )
+        tasksAPI.updateTask(task,model)
             .then(res => {
                 const newTasks = tasks[task.todoListId].map((t: DomainTask) => (t.id === task.id ? {...t, ...model} : t))
                 setTasks({...tasks, [task.todoListId]: newTasks})

@@ -89,8 +89,8 @@ export const tasksAPI = {
     createTask(todolistId:string,title:string){
         return instance.post<CreateTaskResponse>(`todo-lists/${todolistId}/tasks`,{title})
     },
-    updateTask(todolistId: string, taskId: string, title: string) {
+    updateTask(task: DomainTask,model:UpdateTaskModel) {
         return instance.put<UpdateTaskResponse>(
-            `todo-lists/${todolistId}/tasks/${taskId}`, { title }
-        )}
+            `todo-lists/${task.todoListId}/tasks/${task.id}`,model)
+    }
 }

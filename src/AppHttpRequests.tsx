@@ -203,17 +203,7 @@ export const AppHttpRequests = () => {
             completed: task.completed
         }
 
-        axios
-            .put<UpdateTaskResponse>(
-                `https://social-network.samuraijs.com/api/1.1/todo-lists/${task.todoListId}/tasks/${task.id}`,
-                model,
-                {
-                    headers: {
-                        Authorization: ,
-                        'API-KEY': ,
-                    },
-                }
-            )
+        tasksAPI.updateTask(task,model)
             .then(res => {
                 setTasks((data: Record<string, DomainTask[]>) => ({
                     ...data,

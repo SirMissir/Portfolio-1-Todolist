@@ -1,113 +1,12 @@
 import Checkbox from '@mui/material/Checkbox'
 import React, {ChangeEvent, useEffect, useState} from 'react'
-// import { AddItemForm } from '../common/components/AddItemForm/AddItemForm'
-// import { EditableSpan } from '../common/components/EditableSpan/EditableSpan'
 import AddItemForms from "./AddItemForms";
 import EditableSpan from "./EditableSpan";
-import axios from "axios";
-import {
-    CreateTaskResponse,
-    DeleteTaskResponse, DomainTask, tasksAPI,
-    UpdateTaskModel,
-    UpdateTaskResponse
-} from "./feauters/todolists/api/tasksApi.types";
-import {
-    CreateTodolistResponse,
-    DeleteTodolistResponse, Todolist,
-    UpdateTodolistResponse
-} from "./feauters/todolists/api/todolistsApi.types";
+import {DomainTask,UpdateTaskModel,} from "./feauters/todolists/api/tasksApi.types";
+import {Todolist} from "./feauters/todolists/api/todolistsApi.types";
 import {todolistsApi} from "./feauters/todolists/api/todolistsApi";
+import {tasksAPI} from "./feauters/todolists/api/tasksApi";
 
-
-// export type Todolist = {
-//     id: string
-//     title: string
-//     addedDate: string
-//     order: number
-// }
-// type FieldError = {
-//     error: string
-//     field: string
-// }
-// type CreateTodolistResponse = {
-//     data: {
-//         item: Todolist
-//     },
-//     fieldsErrors: [FieldError],
-//     messages: string,
-//     resultCode: number
-// }
-// type DeleteTodolistResponse = {
-//     resultCode: number
-//     messages: Array<string>,
-//     data: {}
-// }
-// type UpdateTodolistResponse = {
-//     resultCode: number,
-//     messages: Array<string>,
-//     data: {}
-// }
-//
-// export type DomainTask = {
-//     description: string
-//     title: string
-//     status: number
-//     priority: number
-//     startDate: string
-//     deadline: string
-//     id: string
-//     todoListId: string
-//     order: number
-//     addedDate: string
-//     completed: boolean
-// }
-// export type GetTasksResponse = {
-//     error: string | null
-//     totalCount: number
-//     items: DomainTask[]
-// }
-// export type CreateTaskResponse = {
-//     resultCode: number
-//     messages: string
-//     data: {
-//         item: {
-//             description: string
-//             title: string
-//             completed: boolean
-//             status: number
-//             priority: number
-//             startDate: string
-//             deadline: string
-//             id: string
-//             todoListId: string
-//             order: number
-//             addedDate: string
-//
-//         }
-//     }
-//
-// }
-// export type DeleteTaskResponse = {
-//     resultCode: number
-//     messages: string
-//     data: {}
-//     fieldsErrors: [FieldError]
-//
-// }
-// export type UpdateTaskResponse = {
-//     resultCode: number
-//     messages: string,
-//     data: {item: DomainTask}
-// }
-// export type UpdateTaskModel = {
-//     title: string
-//     description: string
-//     completed: boolean
-//     status: number
-//     priority: number
-//     startDate: string
-//     deadline: string
-// }
 
 export const AppHttpRequests = () => {
     const [todolists, setTodolists] = useState<Todolist[]>([])

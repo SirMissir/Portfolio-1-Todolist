@@ -1,3 +1,5 @@
+import {TaskPriority, TaskStatus} from "../enums/enums";
+
 export type FieldError = {
     error: string
     field: string
@@ -5,8 +7,8 @@ export type FieldError = {
 export type DomainTask = {
     description: string
     title: string
-    status: number
-    priority: number
+    status: TaskStatus
+    priority: TaskPriority
     startDate: string
     deadline: string
     id: string

@@ -2,10 +2,12 @@ import Checkbox from '@mui/material/Checkbox'
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import AddItemForms from "./AddItemForms";
 import EditableSpan from "./EditableSpan";
-import {DomainTask,UpdateTaskModel,} from "./feauters/todolists/api/tasksApi.types";
+import {UpdateTaskModel,} from "./feauters/todolists/api/tasksApi.types";
 import {Todolist} from "./feauters/todolists/api/todolistsApi.types";
 import {todolistsApi} from "./feauters/todolists/api/todolistsApi";
 import {tasksAPI} from "./feauters/todolists/api/tasksApi";
+import {DomainTask} from "./common/types/type";
+import {TaskStatus} from "./common/enums/enums";
 
 
 export const AppHttpRequests = () => {
@@ -70,7 +72,7 @@ export const AppHttpRequests = () => {
     }
 
     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>, task: DomainTask) => {
-        let status = e.currentTarget.checked ? 2 : 0
+        let status = e.currentTarget.checked ? TaskStatus.Completed : TaskStatus.New
 
         const model: UpdateTaskModel = {
             status,

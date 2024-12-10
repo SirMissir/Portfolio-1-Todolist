@@ -1,9 +1,9 @@
 import React from 'react'
 import {Provider} from "react-redux";
 import {combineReducers, legacy_createStore as createStore} from "redux";
-import {tasksReducer} from "../state/tasks-reducer";
-import {todolistsReducer} from "../state/todolists-reducer";
-import {AppRootStateType} from "../state/store";
+import {tasksReducer} from "../../feauters/todolists/model/tasks-reducer";
+import {todolistsReducer} from "../../feauters/todolists/model/todolists-reducer";
+import {AppRootStateType} from "../../app/store";
 import {v1} from "uuid";
 
 

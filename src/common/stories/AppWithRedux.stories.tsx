@@ -1,12 +1,12 @@
 import React from 'react'
 import {Meta, StoryFn} from "@storybook/react";
 import {ReduxStoreProviderDecorator} from './ReduxStoreProviderDecorator'
-import AppWithRedux from "../AppWithRedux";
+import AppWithRedux from "../../app/AppWithRedux";
 
 
 
 const meta: Meta<typeof AppWithRedux> = {
-    title: 'TodoList/AppWithReduxComponent',
+    title: 'TodoListOld/AppWithReduxComponent',
     component: AppWithRedux,
     tags: ['autodocs'],
     decorators: [ReduxStoreProviderDecorator], // Декоратор для обертывания в Redux Provider

@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, StoryFn } from "@storybook/react";
 import { action } from '@storybook/addon-actions'; // Импортируем action из addon-actions
 import {Task} from "../Task ";
-import {TaskType} from "../TodoList"
+import {TaskType} from "../../feauters/todolists/ui/Todolists/TodoListOld"
 
 
 const meta: Meta<typeof Task> = {

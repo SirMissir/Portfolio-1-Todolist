@@ -1,12 +1,12 @@
 import React, {ChangeEvent, memo, useCallback} from 'react';
-import {FilterValuesType} from "./AppWithRedux";
-import AddItemForms from "./AddItemForms";
-import EditableSpan from "./EditableSpan";
+import {FilterValuesType} from "../../../../app/AppWithRedux";
+import AddItemForms from "../../../../common/components/AddItemForm/AddItemForms";
+import EditableSpan from "../../../../common/components/EditableSpan/EditableSpan";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import {ButtonMemo} from "./ButtonMemo";
+import {ButtonMemo} from "../../../../common/components/ButtonMemo";
 import {Task} from "./Task ";
 
 
@@ -30,7 +30,7 @@ export type TaskType = {
     isDone:boolean
 }
 
-const TodoList =memo( (props:TodoListPropsType) => {
+const TodoListOld =memo( (props:TodoListPropsType) => {
     console.log('Todolist')
     let isAllTasksNotIsDone = true // все не выполнено, change background-color todolist
     for (let i = 0; i < props.tasks.length; i++) {
@@ -119,4 +119,4 @@ const TodoList =memo( (props:TodoListPropsType) => {
     );
 })
 
-export default TodoList;
+export default TodoListOld;

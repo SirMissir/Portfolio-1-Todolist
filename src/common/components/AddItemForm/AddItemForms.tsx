@@ -7,7 +7,7 @@ export type AddItemFormPropsType = {
     addItem: (title:string)=>void
 }
 
-export const AddItemForms = memo( ({addItem}:AddItemFormPropsType) => {
+export const AddItemForm = memo( ({addItem}:AddItemFormPropsType) => {
 
         //console.log('AddItemForm')
 

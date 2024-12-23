@@ -1,6 +1,10 @@
 import {AddItemForm} from "../../../../../common/components/AddItemForm/AddItemForm";
 import {useAppDispatch} from "../../../../../common/hooks/useAppDispatch";
 import {addTaskAC} from "../../../model/tasks-reducer";
+import {TodolistType} from "../../../model/todolists-reducer";
+import {FilterTasksButtons} from "./FilterTasksButtons/FilterTasksButtons";
+import {Tasks} from "./Tasks/Tasks";
+import {TodolistTitle} from "./TodolistTitle/TodolistsTitle";
 
 
 type Props = {

@@ -11,7 +11,7 @@ export const Main = () => {
     const dispatch = useAppDispatch()
 
     const addTodolist = (title: string) => {
-        dispatch(addTodolistAC(title))
+        dispatch(addTodoListAC(title))
     }
 
     return (

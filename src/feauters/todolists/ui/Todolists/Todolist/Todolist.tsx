@@ -1,8 +1,8 @@
-import {AddItemForm} from "../../../../../common/components/AddItemForm/AddItemForm";
+import {AddItemForm} from "../../../../../common/components/AddItemForm/AddItemForms";
 import {useAppDispatch} from "../../../../../common/hooks/useAppDispatch";
 import {addTaskAC} from "../../../model/tasks-reducer";
 import {TodolistType} from "../../../model/todolists-reducer";
-import {FilterTasksButtons} from "./FilterTasksButtons/FilterTasksButtons";
+import {FilterTasksButtons} from "./FilterTasksButton/FilterTasksButton";
 import {Tasks} from "./Tasks/Tasks";
 import {TodolistTitle} from "./TodolistTitle/TodolistsTitle";
 

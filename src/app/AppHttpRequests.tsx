@@ -1,13 +1,13 @@
 import Checkbox from '@mui/material/Checkbox'
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import AddItemForms from "./AddItemForms";
-import EditableSpan from "./EditableSpan";
-import {UpdateTaskModel,} from "./feauters/todolists/api/tasksApi.types";
-import {Todolist} from "./feauters/todolists/api/todolistsApi.types";
-import {todolistsApi} from "./feauters/todolists/api/todolistsApi";
-import {tasksAPI} from "./feauters/todolists/api/tasksApi";
-import {DomainTask} from "./common/types/type";
-import {TaskStatus} from "./common/enums/enums";
+import {AddItemForms} from "../common/components/AddItemForm/AddItemForms";
+import {EditableSpan} from "../common/components/EditableSpan/EditableSpan";
+import {UpdateTaskModel} from "../feauters/todolists/api/tasksApi.types";
+import {Todolist} from "../feauters/todolists/api/todolistsApi.types";
+import {todolistsApi} from "../feauters/todolists/api/todolistsApi";
+import {tasksAPI} from "../feauters/todolists/api/tasksApi";
+import {DomainTask} from "../common/types/type";
+import {TaskStatus} from "../common/enums/enums";
 
 
 export const AppHttpRequests = () => {
@@ -126,8 +126,8 @@ export const AppHttpRequests = () => {
                     <div key={tl.id} style={todolist}>
                         <div>
                             <EditableSpan
-                                title={tl.title}
-                                changeTitle={(title: string) => updateTodolistHandler(tl.id, title)}
+                                value={tl.title}
+                                onChange={(title: string) => updateTodolistHandler(tl.id, title)}
                             />
                             <button onClick={() => removeTodolistHandler(tl.id)}>x</button>
                         </div>
@@ -143,8 +143,8 @@ export const AppHttpRequests = () => {
                                             onChange={e => changeTaskStatusHandler(e, task)}
                                         />
                                         <EditableSpan
-                                            title={task.title}
-                                            changeTitle={title => changeTaskTitleHandler(title, task)}
+                                            value={task.title}
+                                            onChange={title => changeTaskTitleHandler(title, task)}
                                         />
                                         <button onClick={() => removeTaskHandler(task.id, tl.id)}>x</button>
                                     </div>

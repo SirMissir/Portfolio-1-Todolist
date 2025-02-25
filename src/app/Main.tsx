@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import React from "react";
-import {AddItemForm} from "../common/components/AddItemForm/AddItemForms";
+import {AddItemForms} from "../common/components/AddItemForm/AddItemForms";
 import {useAppDispatch} from "../common/hooks/useAppDispatch";
 import {addTodoListAC} from "../feauters/todolists/model/todolists-reducer";
 import {Todolists} from "../feauters/todolists/ui/Todolists/Todolists";
@@ -17,7 +17,7 @@ export const Main = () => {
     return (
         <Container fixed>
             <Grid container sx={{mb: '30px'}}>
-                <AddItemForm addItem={addTodolist}/>
+                <AddItemForms addItem={addTodolist}/>
             </Grid>
 
             <Grid container spacing={4}>

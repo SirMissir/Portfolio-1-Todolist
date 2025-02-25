@@ -8,7 +8,7 @@ export type AddItemFormPropsType = {
     addItem: (title:string)=>void
 }
 
-export const AddItemForm = ({addItem}:AddItemFormPropsType) => {
+export const AddItemForms = ({addItem}:AddItemFormPropsType) => {
 
     const [title, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)

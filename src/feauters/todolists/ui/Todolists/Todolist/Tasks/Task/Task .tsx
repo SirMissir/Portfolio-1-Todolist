@@ -7,7 +7,7 @@ import {EditableSpan} from "../../../../../../../common/components/EditableSpan/
 import {useAppDispatch} from "../../../../../../../common/hooks/useAppDispatch";
 import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TaskType} from "../../../../../model/tasks-reducer";
 import {TodolistType} from "../../../../../model/todolists-reducer";
-import {getListItemSx} from "./Task.styles";
+import {getListItemSx} from "./Task.style";
 
 
 type Props = {

@@ -1,4 +1,4 @@
-import {AddItemForm} from "../../../../../common/components/AddItemForm/AddItemForms";
+import {AddItemForms} from "../../../../../common/components/AddItemForm/AddItemForms";
 import {useAppDispatch} from "../../../../../common/hooks/useAppDispatch";
 import {addTaskAC} from "../../../model/tasks-reducer";
 import {TodolistType} from "../../../model/todolists-reducer";
@@ -22,7 +22,7 @@ export const Todolist = ({todolist}: Props) => {
     return (
         <>
             <TodolistTitle todolist={todolist}/>
-            <AddItemForm addItem={addTask}/>
+            <AddItemForms addItem={addTask}/>
             <Tasks todolist={todolist}/>
             <FilterTasksButtons todolist={todolist}/>
         </>
